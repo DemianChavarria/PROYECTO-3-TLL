@@ -1,0 +1,47 @@
+
+#################################################################################################################################
+#################################################################################################################################
+
+# Cambiar de str a int
+# ------------------------------
+
+
+def entero(texto):
+
+    numero = 0
+    exp = 0
+    digito = 0
+
+    for n in texto:
+        exp += 1
+        
+    exp -= 1
+    for n in texto:
+
+        if n == "0":
+            digito = 0
+        elif n == "1":
+            digito = 1
+        elif n == "2":
+            digito = 2
+        elif n == "3":
+            digito = 3
+        elif n == "4":
+            digito = 4
+        elif n == "5":
+            digito = 5
+        elif n == "6":
+            digito = 6
+        elif n == "7":
+            digito = 7
+        elif n == "8":
+            digito = 8
+        elif n == "9":
+            digito = 9
+
+        numero += (digito*(10**exp))
+        exp -= 1
+    
+    return numero
+
+    
