@@ -1,7 +1,7 @@
 # Importar modulos
 import Datos
 
-from Modulo_Paises_Seleccion import Pais, Seleccion
+from Modulo_Paises_Seleccion import registrar_pais, registrar_seleccion
 from Modulo_int_str import entero
 from Modulo_Persona_FUT_ENT import Futbolista, Entrenador
 
@@ -62,7 +62,7 @@ def Crear_paises():
         
         pais = linea.strip().split(";")
 
-        Datos.g_paises.append(Pais(pais[0], pais[1], pais[2], entero(pais[3])))
+        Datos.g_paises.append(registrar_pais(pais[0], pais[1], pais[2], entero(pais[3])))
     
     f"Paises creados"
 
@@ -107,7 +107,7 @@ def Crear_seleccion():
     for linea in txt_selecciones:
         seleccion = linea.strip().split(";")
 
-        Datos.g_selecciones.append(Seleccion(seleccion[0], seleccion[1]))
+        Datos.g_selecciones.append(registrar_seleccion(seleccion[0], seleccion[1]))
 
 
 
@@ -144,7 +144,7 @@ def Crear_seleccion():
     txt_selecciones.close()
 
 
-def imprimir():
+def imprimir():  # prueba
 
     for c in range(len(Datos.g_paises)):
 
@@ -161,3 +161,4 @@ def imprimir():
 Crear_paises()
 Crear_seleccion()
 imprimir()
+Datos.inicio = False

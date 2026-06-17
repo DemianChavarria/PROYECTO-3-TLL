@@ -1,1 +1,2 @@
 CRC;Costa Rica;America;100
+ARG;Argentina;America;30

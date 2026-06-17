@@ -102,9 +102,7 @@ class Futbolista(Persona):
                     self.goles = 0             
                     self.asistencias = 0
 
-                    if Datos.inicio == False:
-                        print("Validar")
-                
+
                 else:
                     return f"Error, no se permiten esteroides ni bebidas energizantes"
 
@@ -224,8 +222,6 @@ class Entrenador(Persona):
                 self.experiencia = años_experiencia
                 self.alineacion = alineacion
                 
-                if Datos.inicio == False:
-                    print("Validar")
 
             else:
                 return f"Error, nadie tiene mas de 50 años de experiencia"
@@ -319,29 +315,6 @@ class Entrenador(Persona):
 #################################################################################################################################
 #################################################################################################################################
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#################################################################################################################################
-#################################################################################################################################
 
 """
 #Objetivo: Mofificar los valores de cada atributo de un objeto.

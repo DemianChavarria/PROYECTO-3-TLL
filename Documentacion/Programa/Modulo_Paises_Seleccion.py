@@ -23,13 +23,11 @@ class Pais:
 
         if isinstance(codigo_fifa, str) and isinstance(nombre_pais, str) and isinstance(continente, str) and isinstance(ranking_fifa, int):
                 
-                #if not inicio:
-                    #registrar_pais()
 
-                self.codigo_fifa = codigo_fifa      # Codigo de la FIFA
-                self.nombre_pais = nombre_pais      # Nombre del Pais
-                self.continente = continente        # Continente al que pertenece, Confederacion
-                self.ranking_fifa = ranking_fifa    # Su Posicion en el tabla del Mundial
+            self.codigo_fifa = codigo_fifa      # Codigo de la FIFA
+            self.nombre_pais = nombre_pais      # Nombre del Pais
+            self.continente = continente        # Continente al que pertenece, Confederacion
+            self.ranking_fifa = ranking_fifa    # Su Posicion en el tabla del Mundial
 
     
         else:
@@ -45,49 +43,59 @@ class Pais:
 
     #S: retorna la modificacion de los atributos del objeto  |  la modificacion se aplicara en el archivo de texto correspondiente a paises
 
-    #R: el codigo de fifa, nombre, contienente debe ser string(str)  |  el ranking debe ser un interger(int)
+    #R: el codigo de fifa, nombre_pais, contienente debe ser string(str)  |  el ranking debe ser un interger(int)
 
-    def actualizar_datos(self, codigo_fifa, nombre, continente, ranking_fifa):
+    def actualizar_datos(self, codigo_fifa, nombre_pais, continente, ranking_fifa):
     # ------------------------------
 
-        if isinstance(codigo_fifa, str) and isinstance(nombre, str) and isinstance(continente, str) and isinstance(ranking_fifa, int):
-                
-            # Variables
-            nombre_viejo = self.nombre_pais
-            lista_paises = []
-            paises = []
+        if isinstance(codigo_fifa, str) and isinstance(nombre_pais, str) and isinstance(continente, str) and isinstance(ranking_fifa, int):
+            
 
+            # variables
+            txt_paises = []
+
+
+
+            """
+            Descripcion ; 
+
+            1. Validar que la modificacion de los atributos del objeto pais no sea igual a otra ya existente
+
+            2. la modificacion se aplicara a los atributos del objeto especifico
+
+            3. se buscara primero modificar la informacion del objeto pais especifico en la base de datos
+
+            """
+
+
+
+            # paso 1
+            for c in range(len(Datos.g_paises)):
+
+                if Datos.g_paises[c].codigo_fifa == codigo_fifa or Datos.g_paises[c].nombre_pais == nombre_pais:
+                    return f"Error, la informacion del objeto a modificar ya se encuentra incluido"
+                
+
+            
+            # paso 2
             self.codigo_fifa = codigo_fifa      # Codigo de la FIFA
-            self.nombre_pais = nombre           # Nombre del Pais
-            self.continente = continente        # Continente al que pertenece, Confedereacion
+            self.nombre_pais = nombre_pais      # Nombre del Pais
+            self.continente = continente        # Continente al que pertenece, Confederacion
             self.ranking_fifa = ranking_fifa    # Su Posicion en el tabla del Mundial
 
+            
+            
+            # paso 3
+            txt_paises = open("paises.txt", "w")
+            for c in range(len(Datos.g_paises)):
+
+                txt_paises.write(f"{Datos.g_paises[c].codigo_fifa};{Datos.g_paises[c].nombre_pais};{Datos.g_paises[c].continente};{Datos.g_paises[c].ranking_fifa}")
                 
 
+            return f"Pais Modificado"
 
-            """
-            Descripcion ; el cambio se realizara en el archivo de texto posteior a la modificacion de los atributos del objeto pais, 
-            la variable "paises" guardara todo lo que tenga el txt. de "lista_paises", luego en modo sobreescritura guarda cada pais en txt. 
-            si se encuentra con el pais a modificar entonces realizara los cambios segun el contenido actual del objeto y se guardara en el txt.
-            """
-            lista_paises = open("paises.txt", "r")
-            for linea in lista_paises:
-                    
-                pais = linea.strip().split(";")
-                paises = paises + [pais]
-            lista_paises.close()
 
-            lista_paises = open("paises.txt", "w")
-            for f in range(len(paises)):
-                
-                if paises[f][1] == nombre_viejo:
-                    paises[f][0] = self.codigo_fifa
-                    paises[f][1] = self.nombre_pais
-                    paises[f][2] = self.continente
-                    paises[f][3] = self.ranking_fifa
-                
-                lista_paises.write(paises[f][0] + ";" + paises[f][1] + ";" + paises[f][2] + ";" + f"{paises[f][3]}" + "\n")
-            lista_paises.close()
+
 
 
 
@@ -100,22 +108,22 @@ class Pais:
 # Clase constructor Selecciones
 class Seleccion:
 
-    def __init__(self, codigo_equipo, nom_pais):
+    def __init__(self, codigo_equipo, nombre_pais):
 
-        if isinstance(codigo_equipo, str) and isinstance(nom_pais, str):
+        if isinstance(codigo_equipo, str) and isinstance(nombre_pais, str):
                 
 
-                # buscara en la variable global de paises el objeto pais a incluir a la seleccion 
+                # buscara en el Modulo de base de datos el pais a incluir a la seleccion
                 for c in range(len(Datos.g_paises)):
 
-                    if Datos.g_paises[c].nombre_pais == nom_pais:
+                    if Datos.g_paises[c].nombre_pais == nombre_pais:
                         pais = Datos.g_paises[c]
 
             
                 #Bloque, gestionado por el usuario
                 self.codigo_equipo = codigo_equipo
                 self.pais = pais
-                self.entrenador = ""
+                self.entrenador = None
                 self.jugadores = []
 
                 # Bloque, gestionado por el programa
@@ -125,8 +133,6 @@ class Seleccion:
                 self.total_tarjetas_rojas = 0
                 self.fuerza_equipo = 0
 
-                if Datos.inicio == False:
-                    print("validar")
         
         else:
             return f"Error, los datos ingresados no son validos"
@@ -147,20 +153,26 @@ class Seleccion:
 
         print(f"== SELECCION ==")
         print(f"Escudo: {self.codigo_equipo}")
-        f"Pais: {self.pais.nombre_pais}\n\n"
-        f"== ENTRENADOR =="
-        f"Entrenador: {self.entrenador.nombre}\n\n"
-        f"== 11 OFICIAL =="
-        for c in range(len(self.jugadores)):
-            jugador = self.jugadores[c]
-            
-            f"Nombre: {jugador.nombre}  Apellido: {jugador.apellido}"
-            f"Dorsal: {jugador.dorsal}"
-            f"Posicion: {jugador.posicion}"
-            f"Puntaje Individual: {jugador.calidad}"
-            f"Tarjetas amarillas: {jugador.tarjeta_amarilla}  Tarjetas Rojas: {jugador.tarjeta_roja}"
-            f"Goles: {jugador.goles}  Aistencias: {jugador.asistencias}"
-    
+        print(f"Pais: {self.pais.nombre_pais}\n\n")
+        print(f"== ENTRENADOR ==")
+        if self.entrenador == None:
+            print("No tiene un entrenador asignado")
+        else:
+            print(f"Entrenador: {self.entrenador.nombre}\n\n")
+        print(f"== 11 OFICIAL ==")
+        if self.jugadores == []:
+            print("No hay juagdores en la plantilla")
+        else:
+            for c in range(len(self.jugadores)):
+                jugador = self.jugadores[c]
+                
+                print(f"Nombre: {jugador.nombre}  Apellido: {jugador.apellido}")
+                print(f"Dorsal: {jugador.dorsal}")
+                print(f"Posicion: {jugador.posicion}")
+                print(f"Puntaje Individual: {jugador.calidad}")
+                print(f"Tarjetas amarillas: {jugador.tarjeta_amarilla}  Tarjetas Rojas: {jugador.tarjeta_roja}")
+                print(f"Goles: {jugador.goles}  Aistencias: {jugador.asistencias}")
+        
 
 
 
@@ -181,20 +193,44 @@ class Seleccion:
 
                 if isinstance(dorsal, int) and isinstance(posicion, str) and isinstance(puntaje_individual, int):
 
+                    
 
-            
+                    # Variable
+                    txt_jugadores = []
+
 
                     """
-                    Descripcion ; al ingresar un nuevo jugador primero se validara en la lista de jugadores no exista un jugandor
-                    con el mismo nombre y apellido o con el mismo dorsal de no ser asi, el objeto futbolista se creara y se guardara en la lista de jugadores
+                    Descripcion ; 
+                    
+                    1. Al ingresar un nuevo jugador primero se validara en la lista de jugadores del objeto seleccion no exista un jugandor
+                    con el mismo nombre y apellido o con el mismo dorsal.
+                    
+                    2. La informacion del futbolista se guardara en el archivo de texto jugadores.txt.
+
+                    3. El objeto futbolista se creara y se guardara en la lista de jugadores del objeto seleccion.
+
                     """
-                    for c in range(len(self.juagdores)):
+
+
+                    # Paso 1
+                    for c in range(len(self.jugadores)):
                         jugador = self.jugadores[c]
 
                         if jugador.nombre == nombre and jugador.apellido == apellido or jugador.dorsal == dorsal:
                             return f"Error, no pueden existir dos jugadores iguales o con el mismo dorsal"
                     
-                    # falta registrarlo
+
+
+
+                    # paso 2
+                    txt_jugadores = open("jugadores.txt", "a")
+                    txt_jugadores.write(f"{nombre};{apellido};{fecha_nacimiento};{nacionalidad};{dorsal};{posicion};{puntaje_individual};{self.codigo_equipo};{0};{0};{0};{0}\n")
+                    txt_jugadores.close()
+
+
+
+
+                    # paso 3
                     self.jugadores.append(Futbolista(nombre, apellido, fecha_nacimiento, nacionalidad, dorsal, posicion, puntaje_individual))
                 
 
@@ -229,13 +265,13 @@ class Seleccion:
 
                 
                 # Variables
-                nueva_lista = []        # aqui se incluyen los jugadores no marcados a eliminar
+                txt_jugadores = []
                 lista_jugadores = []
 
 
 
                 """
-                Descripcion ; por cada jugador en la lista de jugadores, guardara en nueva_lista todo juagdor que no tenga el numero
+                Descripcion ; por cada jugador en la lista de jugadores, guardara en lista_jugadores todo juagdor que no tenga el numero
                 del dorsal que se plantea eliminar de la plantilla de la seleccion
                 """
                 for c in range(len(self.jugadores)):
@@ -243,40 +279,58 @@ class Seleccion:
 
                     if jugador.dorsal != dorsal:
 
-                        nueva_lista = nueva_lista + [jugador]
+                        lista_jugadores.append(jugador)
                 
 
-                # Si nueva lista es igual a la lista de jugadores quiere decir que no se encontro al jugador
-                if len(nueva_lista) == len(self.jugadores):
+                # Si lista_jugadores es igual a la lista de jugadores del objeto seleccion quiere decir que no encontro al jugador
+                if len(lista_jugadores) == len(self.jugadores):
                     return f"Error, el jugador a eliminar no se encuentra en la plantilla"
                 
 
 
 
                 else:
-                    self.jugadores = nueva_lista
-                    nueva_lista = []
+                    self.jugadores = lista_jugadores
+                    lista_jugadores = []
 
                     """
                     Descripcion ; posterior a la eliminacion del jugador de la plantilla, se buscara en la base de datos para eliminarlo igualmente.
-                    "nueva_lista" guardara todo lo que este en el archivo de texto, luego cada jugador pasara a validarse su dorsal y equipo actual, si cumple alguna
+                    
+                    1. "lista_jugadores" guardara todo lo que este en el archivo de texto.
+                    
+                    2. luego cada jugador pasara a validarse su dorsal y equipo actual, si cumple alguna
                     entonces se guardara en el archivo de texto, de no cumplir ninguna es el jugador a eliminar.
-                    """
-                    lista_jugadores = open("jugadores.txt", "r")
-                    for linea in lista_jugadores:
-                        
-                        nueva_lista = nueva_lista + [linea.strip().split(";")]
-                    lista_jugadores.close()
 
-                    lista_jugadores = open("jugadores.txt", "w")
-                    for f in range(len(nueva_lista)):
+                    """
+
+
+                    # paso 1
+                    txt_jugadores = open("jugadores.txt", "r")
+                    for linea in txt_jugadores:
+                        
+                        lista_jugadores.append(linea.strip().split(";"))
+                    txt_jugadores.close()
+
+
+
+
+
+
+                    # paso 2
+                    txt_jugadores = open("jugadores.txt", "w")
+                    for f in range(len(lista_jugadores)):
 
 
                         # Se valida su dorsal y equipo al que pertenece
-                        if nueva_lista[f][4] != dorsal or nueva_lista[f][7] != self.codigo_equipo:
+                        if lista_jugadores[f][4] != dorsal or lista_jugadores[f][7] != self.codigo_equipo:
 
-                            lista_jugadores.write(f"{nueva_lista[f][0]};{nueva_lista[f][1]};{nueva_lista[f][2]};{nueva_lista[f][3]};{nueva_lista[f][4]};{nueva_lista[f][5]};{nueva_lista[f][6]};{nueva_lista[f][7]}\n")
-                    lista_jugadores.close()
+
+
+                            lista_jugadores.write(f"{lista_jugadores[f][0]};{lista_jugadores[f][1]};{lista_jugadores[f][2]};{lista_jugadores[f][3]};{lista_jugadores[f][4]};{lista_jugadores[f][5]};{lista_jugadores[f][6]};{lista_jugadores[f][7]}\n")
+                    txt_jugadores.close()
+
+
+
 
                     return f"Jugador eliminado!"
             
@@ -307,35 +361,63 @@ class Seleccion:
 
 
         # Variables
-        nueva_lista = []
-        lista_entrenadores = [] 
+        lista_entrenadores = []
+        txt_entrenadores = []
 
 
         """
-        Descripcion ; luego de cambiar de entrenador, hay que eliminarlo de la bsae de datos correspondiente a entrenadores.txt
-        para validar eso, el entrenador no debe pertenecer al codigo de equipo del objeto especifico, y si lo es o si pertenece
-        entonces hay que validar que sea el entrenador actual del objeto seleccion especifico, de no ser asi entonces es el entrenador
-        a eliminar
+        Descripcion ; 
+
+        1. El entrenador nuevo se guardara en el atributo del objeto seleccion correspondiente.
+
+        2. la informacion del nuevo entrenador se guardara en el archivo de texto "entrenadores.txt".
+
+        3. se eliminara la informacion del entrenador remplazado de la seleccion objeto especifico.
+
         """
-        lista_entrenadores = open("entrenadores.txt", "r")
-        for linea in lista_entrenadores:
 
-            nueva_lista = nueva_lista + [linea.strip().split(";")]
-        lista_entrenadores.close()
+        # PASO 1
+        self.entrenador = Entrenador(nombre, apellido, fecha_nacimiento, nacionalidad, licencia, años_experiencia, alineacion)
+        
 
 
-        lista_entrenadores = open("entrenadores.txt", "w")
-        for f in range(len(nueva_lista)):
+
+
+        # PASO 2
+        txt_entrenadores = open("entrenadores.txt", "a")
+        txt_entrenadores.write(f"{nombre};{apellido};{fecha_nacimiento};{nacionalidad};{licencia};{años_experiencia};{alineacion};{self.codigo_equipo}")
+        txt_entrenadores.close()
+
+
+
+
+
+        # PASO 3
+        txt_entrenadores = open("entrenadores.txt", "r")
+        for linea in txt_entrenadores:
+
+            lista_entrenadores.append(linea.strip().split(";"))
+        txt_entrenadores.close()
+
+
+
+
+        txt_entrenadores = open("entrenadores.txt", "w")
+        for f in range(len(lista_entrenadores)):
 
             
-            if not nueva_lista[f][7] == self.codigo_equipo:
-               lista_entrenadores.write(f"{nueva_lista[f][0]};{nueva_lista[f][1]};{nueva_lista[f][2]};{nueva_lista[f][3]};{nueva_lista[f][4]};{nueva_lista[f][5]};{nueva_lista[f][6]};{nueva_lista[f][7]}\n")
+            if not lista_entrenadores[f][7] == self.codigo_equipo:
+               txt_entrenadores.write(f"{lista_entrenadores[f][0]};{lista_entrenadores[f][1]};{lista_entrenadores[f][2]};{lista_entrenadores[f][3]};{lista_entrenadores[f][4]};{lista_entrenadores[f][5]};{lista_entrenadores[f][6]};{lista_entrenadores[f][7]}\n")
+
+
+
 
             else:
-                if nueva_lista[f][0] == self.entrenador.nombre:
-                    lista_entrenadores.write(f"{nueva_lista[f][0]};{nueva_lista[f][1]};{nueva_lista[f][2]};{nueva_lista[f][3]};{nueva_lista[f][4]};{nueva_lista[f][5]};{nueva_lista[f][6]};{nueva_lista[f][7]}\n")
+                if lista_entrenadores[f][0] == self.entrenador.nombre:
+                    txt_entrenadores.write(f"{lista_entrenadores[f][0]};{lista_entrenadores[f][1]};{lista_entrenadores[f][2]};{lista_entrenadores[f][3]};{lista_entrenadores[f][4]};{lista_entrenadores[f][5]};{lista_entrenadores[f][6]};{lista_entrenadores[f][7]}\n")
 
-        lista_entrenadores.close()    
+
+        txt_entrenadores.close()    
     
 
     # Objetivo;
@@ -352,11 +434,78 @@ class Seleccion:
 
 # Objetivo; guardar la informacion del objeto pais en la base de datos correspondiente a paises.txt  |  evitar validaciones cada vez que el programa se ejecute
 
-#E: recibe el objeto pais
+#E: receibe los datos especificos para el objeto pais
 
-#S: retorna la informacion del objeto pais en la base de datos
+#S: retorna la informacion del objeto pais en el Modulo de base de datos y en su archivo de texto correspondiente
 
-#R: la informacion del objeto pais no puede ser otra ya existente en la base de datos
+#R: la informacion del objeto pais no puede ser otra ya existente en la base de datos  |  evitar guardarlo en el archivo de texto cada vez que el programa se ejecute
 
-#def registrar_pais(pais):
+def registrar_pais(codigo_fifa, nombre_pais, continente, ranking_fifa):
 # ------------------------------
+
+    if Datos.inicio:
+
+        return Pais(codigo_fifa, nombre_pais, continente, ranking_fifa)
+
+    else:
+
+        # Variables
+        txt_paises = []
+
+
+        for c in range(len(Datos.g_paises)):
+
+            if Datos.g_paises[c].codigo_fifa == codigo_fifa or Datos.g_paises[c].nombre_pais == nombre_pais:
+                return f"Error, los datos ingresados ya se encuentran incluidos"
+            
+
+
+        Datos.g_paises.append(Pais(codigo_fifa, nombre_pais, continente, ranking_fifa))
+
+
+
+        txt_paises = open("paises.txt", "a")
+        txt_paises.write(f"{codigo_fifa};{nombre_pais};{continente};{ranking_fifa}\n")
+
+        txt_paises.close()
+
+
+
+
+
+
+# Objetivo; guardar la informacion del objeto Seleccion en la base de datos correspondiente a selecciones.txt
+
+#E: recibe los datos especificos para el objeto seleccion
+
+#S: retorna la informacion del objeto seleccion en el Modulo de base de datos y en su archivo de texto correspondiente
+
+#R: la informacion del objeto seleccion no puede ser otra ya existente en la base de datos  |  evitar guardarlo en el archivo de texto cada vez que el programa se ejecute
+
+def registrar_seleccion(codigo_equipo, nombre_pais):
+
+    if Datos.inicio:
+
+        return Seleccion(codigo_equipo, nombre_pais)
+    
+
+    else:
+
+        # variable
+        txt_selecciones = []
+
+        for c in range(len(Datos.g_selecciones)):
+
+            if Datos.g_selecciones[c].codigo_equipo == codigo_equipo or Datos.g_selecciones[c].pais.nombre_pais == nombre_pais:
+                return f"Error, los datos ya se encuentran incluidos"
+        
+
+
+        Datos.g_selecciones.append(Seleccion(codigo_equipo, nombre_pais))
+
+
+
+        txt_selecciones = open("selecciones.txt", "a")
+        txt_selecciones.write(f"{codigo_equipo};{nombre_pais}\n")
+
+        txt_selecciones.close()
