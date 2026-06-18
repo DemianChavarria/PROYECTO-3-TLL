@@ -154,42 +154,66 @@ class Futbolista(Persona):
 
 
 
-                #Variables
-                nueva_lista = []
+                """
+                Descripcion ; 
+
+                1. validar que el dorsal del jugador no este repetido en la plantilla segun en la seleccion a la que pertenece
+
+                2. reazlizar el cambio de los atributos del objeto jugador
+
+                3. la modificacion se realizara en el archivo de texto correspondiente a jugadores.txt
+                """
+
+
+                # Variables
+                txt_jugadores = []
                 lista_jugadores = []
+
+
+
+
+                # paso 1
+                txt_jugadores = open("jugadores.txt", "r")
+                for linea in txt_jugadores:
+                    jugador = linea.strip().split(";")
+
+                    lista_jugadores.append(jugador)
+
+                    if jugador[3] == self.nacionalidad:
+                        if jugador[4] == dorsal:
+                            return f"Error, el dorsal del jugador ya se encuentra en uso"
+                        
+                txt_jugadores.close()
                 
-                # validar dorsal repetido  | base de datos
+
+
+
+                # paso 2
                 self.dorsal = dorsal
                 self.posicion = posicion
-                self.calidad = puntaje_individual
+                self.calidad = self.calidad
 
 
 
 
-                """
-                Descripcion ; posterior a la modificacion de los atributos del futbolista, estos tambien se modificaran en el archivo de texto. "nueva_lista" tomara
-                todo lo que este en jugadores.txt, luego, en modo sobreescritura se guardara la informacion de cada jugador en el archivo de texto.
-                si se encuentra con el jugador a modificar, realizara los cambios y lo guardara en el archivo de texto.
-                """
-                lista_jugadores = open("jugadores.txt", "r")
-                for linea in lista_jugadores:
+                # paso 3
+                txt_jugadores = open("jugadores.txt", "w")
+                for f in range(len(lista_jugadores)):
 
-                    nueva_lista = nueva_lista + [linea.strip().split(";")]
-                lista_jugadores.close()
-
-
-
-                lista_jugadores = open("jugadores.txt", "w")
-                for f in range(len(nueva_lista)):
-
-                    if nueva_lista[f][0] == self.nombre and nueva_lista[f][1] == self.apellido and nueva_lista[f][2] == self.fecha_nacimiento and nueva_lista[f][3] == self.nacionalidad:
-                        nueva_lista[f][4] = self.dorsal
-                        nueva_lista[f][5] = self.posicion
-                        nueva_lista[f][6] = self.calidad
+                    if lista_jugadores[f][0] == self.nombre and lista_jugadores[f][1] == self.apellido and lista_jugadores[f][2] == self.fecha_nacimiento and lista_jugadores[f][3] == self.nacionalidad:
+                        lista_jugadores[f][4] = self.dorsal
+                        lista_jugadores[f][5] = self.posicion
+                        lista_jugadores[f][6] = self.calidad
                     
-                    lista_jugadores.write(f"{nueva_lista[f][0]};{nueva_lista[f][1]};{nueva_lista[f][2]};{nueva_lista[f][3]};{nueva_lista[f][4]};{nueva_lista[f][5]};{nueva_lista[f][6]};{nueva_lista[f][7]}\n")
+                    lista_jugadores.write(f"{lista_jugadores[f][0]};{lista_jugadores[f][1]};{lista_jugadores[f][2]};{lista_jugadores[f][3]};{lista_jugadores[f][4]};{lista_jugadores[f][5]};{lista_jugadores[f][6]};{lista_jugadores[f][7]}\n")
                 lista_jugadores.close()
             
+
+
+
+
+
+
 
 
             else:

@@ -410,8 +410,6 @@ class Seleccion:
                txt_entrenadores.write(f"{lista_entrenadores[f][0]};{lista_entrenadores[f][1]};{lista_entrenadores[f][2]};{lista_entrenadores[f][3]};{lista_entrenadores[f][4]};{lista_entrenadores[f][5]};{lista_entrenadores[f][6]};{lista_entrenadores[f][7]}\n")
 
 
-
-
             else:
                 if lista_entrenadores[f][0] == self.entrenador.nombre:
                     txt_entrenadores.write(f"{lista_entrenadores[f][0]};{lista_entrenadores[f][1]};{lista_entrenadores[f][2]};{lista_entrenadores[f][3]};{lista_entrenadores[f][4]};{lista_entrenadores[f][5]};{lista_entrenadores[f][6]};{lista_entrenadores[f][7]}\n")
@@ -420,10 +418,118 @@ class Seleccion:
         txt_entrenadores.close()    
     
 
-    # Objetivo;
-    #E:
-    #S:
-    #R:
+
+
+    # Objetivo; Calcular la fuerza de la seleccion
+
+    #E: No recibe parametros aparte de si mismo
+
+    #S: Retorna la fuerza que tiene el Objeto Seleccion del pais
+
+    #R: Como minimo debe tener un entrenador y un jugador
+
+    def calcular_fueza(self):
+    # ------------------------------
+
+        """
+        Descripcion ;
+
+        1. se validara primero que la plantilla tenga como minimo 11 jugadores y que por lo menos este un entrenador en la plantilla antes de realizar el calculo
+
+        2. se buscara a los 11 jugadores con mayor puntaje de la plantilla
+
+        3. se realizara el calculo de la fuerza de objeto Seleccion especifico  |  sera neceario: 11Jugadores, Un entrenador, La posicion actual del pais
+        """
+
+
+        if not Datos.inicio:
+
+            # Variables
+            titulares = []
+            jugador_seleccionado = None
+            lista_jugadores = []
+            jugadores_seleccion = self.jugadores
+            suma_total = 0
+
+            c = 1
+            c1 = 0
+
+
+
+            # paso 1
+            if len(self.jugadores) < 11 or self.entrenador == None:
+                return f"Error, no se puede calcular la fuerza ya que no contiene los requisitos minimos. (11 jugadores y un Entrenador en la Seleccion)"
+            
+
+
+            
+
+            # paso 2
+            while c <= 11:
+
+                jugador_seleccionado = None
+                lista_jugadores = []
+                
+
+
+                for c1 in range(len(jugadores_seleccion)):
+
+                    if jugador_seleccionado == None:
+                        jugador_seleccionado = jugadores_seleccion[c1]
+                    
+
+
+
+                    if c1 + 1 < len(jugadores_seleccion):
+                        if jugador_seleccionado.calidad >jugadores_seleccion[c1 + 1].calidad:
+                            lista_jugadores.append(jugadores_seleccion[c1 + 1])
+                        
+                        else:
+                            lista_jugadores.append(jugador_seleccionado)
+                            jugador_seleccionado = jugadores_seleccion[c1 + 1]
+
+
+                    else:
+
+                        titulares.append(jugador_seleccionado)
+                
+
+
+                jugadores_seleccion = lista_jugadores
+                c += 1
+
+
+        
+
+
+            # paso 3
+            for jugador in titulares:
+
+                suma_total += jugador.calidad
+            
+            promedio_jugadores = suma_total / 11
+
+
+            factor_entrenador = self.entrenador.experiencia * 4
+            if factor_entrenador > 100:
+                factor_entrenador = 100
+            
+
+            factor_ranking = 100 - self.pais.ranking_fifa
+
+            self.fuerza_equipo = (promedio_jugadores * 0.6) + (factor_entrenador * 0.25) + (factor_ranking * 0.15)
+
+            if self.fuerza_equipo > 100:
+                self.fuerza_equipo = 100
+            
+            else:
+                if self.fuerza_equipo < 1:
+                    self.fuerza_equipo = 1
+        
+
+
+        
+
 
 #################################################################################################################################
 #################################################################################################################################

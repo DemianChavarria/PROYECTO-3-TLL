@@ -22,7 +22,6 @@ Descripcion ;
 El objetivo de este módulo es proporcionar al programa la capacidad de reconstruir automáticamente los objetos y restaurarlos al estado en que se encontraban antes de cerrarse.
 Para lograrlo, se utilizan como referencia los archivos de texto que almacenan la información necesaria para recrear cada objeto y recuperar sus datos.
 
-Como objetivo secundario 
 
 El orden de ejecucion ira de esta manera:
 
@@ -30,7 +29,7 @@ El orden de ejecucion ira de esta manera:
 2. Crear las selecciones  |  necesita pais, entrenador y jugadores
 
 
-5. probablemete mas pasos
+3. probablemete mas pasos
 
 - Nota: cada paso sera una metodo diferente
 """
@@ -63,9 +62,6 @@ def Crear_paises():
         pais = linea.strip().split(";")
 
         Datos.g_paises.append(registrar_pais(pais[0], pais[1], pais[2], entero(pais[3])))
-    
-    f"Paises creados"
-
 
 
 #################################################################################################################################
@@ -108,6 +104,8 @@ def Crear_seleccion():
         seleccion = linea.strip().split(";")
 
         Datos.g_selecciones.append(registrar_seleccion(seleccion[0], seleccion[1]))
+
+        # falta añadir mas cosas a seleccion, manana
 
 
 
