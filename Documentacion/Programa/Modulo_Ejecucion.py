@@ -105,7 +105,10 @@ def Crear_seleccion():
 
         Datos.g_selecciones.append(registrar_seleccion(seleccion[0], seleccion[1]))
 
-        # falta añadir mas cosas a seleccion, manana
+        Datos.g_selecciones[f1].total_goles_afavor = entero(seleccion[2])
+        Datos.g_selecciones[f1].total_goles_encontra = entero(seleccion[3])
+        Datos.g_selecciones[f1].total_tarjetas_amarillas = entero(seleccion[4])
+        Datos.g_selecciones[f1].total_tarjetas_rojas = entero(seleccion[5])
 
 
 
@@ -144,12 +147,16 @@ def Crear_seleccion():
 
 def imprimir():  # prueba
 
+
+    Datos.inicio = False
+
     for c in range(len(Datos.g_paises)):
 
         f"Nombre: {Datos.g_paises[c].nombre_pais}"
     
     for c in range(len(Datos.g_selecciones)):
 
+        Datos.g_selecciones[c].calcular_fuerza()
         Datos.g_selecciones[c].mostrar_datos()
 
 
@@ -159,4 +166,3 @@ def imprimir():  # prueba
 Crear_paises()
 Crear_seleccion()
 imprimir()
-Datos.inicio = False

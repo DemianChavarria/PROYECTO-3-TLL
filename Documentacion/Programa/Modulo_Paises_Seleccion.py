@@ -153,13 +153,21 @@ class Seleccion:
 
         print(f"== SELECCION ==")
         print(f"Escudo: {self.codigo_equipo}")
-        print(f"Pais: {self.pais.nombre_pais}\n\n")
+        print(f"Pais: {self.pais.nombre_pais}")
+        print(f"Fuerza de la Seleccion: {self.fuerza_equipo}\n\n")
+
+
         print(f"== ENTRENADOR ==")
         if self.entrenador == None:
             print("No tiene un entrenador asignado")
+            print("")
         else:
             print(f"Entrenador: {self.entrenador.nombre}\n\n")
+            print("")
+
+            
         print(f"== 11 OFICIAL ==")
+        print("")
         if self.jugadores == []:
             print("No hay juagdores en la plantilla")
         else:
@@ -171,7 +179,10 @@ class Seleccion:
                 print(f"Posicion: {jugador.posicion}")
                 print(f"Puntaje Individual: {jugador.calidad}")
                 print(f"Tarjetas amarillas: {jugador.tarjeta_amarilla}  Tarjetas Rojas: {jugador.tarjeta_roja}")
-                print(f"Goles: {jugador.goles}  Aistencias: {jugador.asistencias}")
+                print(f"Goles: {jugador.goles}  Aistencias: {jugador.asistencias}\n")
+
+        
+        print(f"\n\n")
         
 
 
@@ -209,6 +220,8 @@ class Seleccion:
 
                     3. El objeto futbolista se creara y se guardara en la lista de jugadores del objeto seleccion.
 
+                    4. se realizara una validacion previa antes de calcular la fuerza de equipo
+
                     """
 
 
@@ -232,6 +245,13 @@ class Seleccion:
 
                     # paso 3
                     self.jugadores.append(Futbolista(nombre, apellido, fecha_nacimiento, nacionalidad, dorsal, posicion, puntaje_individual))
+
+
+
+
+                    # paso 4
+                    if len(self.jugadores) >= 11 and self.entrenador != None:
+                        self.calcular_fuerza()
                 
 
 
@@ -301,6 +321,8 @@ class Seleccion:
                     2. luego cada jugador pasara a validarse su dorsal y equipo actual, si cumple alguna
                     entonces se guardara en el archivo de texto, de no cumplir ninguna es el jugador a eliminar.
 
+                    3. se realizara una validacion previa antes de calcular la fuerza de equipo.
+
                     """
 
 
@@ -332,6 +354,13 @@ class Seleccion:
 
 
 
+                    # paso 3
+                    if len(self.jugadores) >= 11 and self.entrenador != None:
+                        self.calcular_fuerza()
+
+
+
+
                     return f"Jugador eliminado!"
             
 
@@ -342,7 +371,10 @@ class Seleccion:
         
         else:
             return f"Error, el dato ingresado es invalido"
-    
+
+
+
+
 
 
 
@@ -373,6 +405,8 @@ class Seleccion:
         2. la informacion del nuevo entrenador se guardara en el archivo de texto "entrenadores.txt".
 
         3. se eliminara la informacion del entrenador remplazado de la seleccion objeto especifico.
+
+        4. Se hara una validacion previa antes de calcular la fuerza de equipo
 
         """
 
@@ -415,8 +449,15 @@ class Seleccion:
                     txt_entrenadores.write(f"{lista_entrenadores[f][0]};{lista_entrenadores[f][1]};{lista_entrenadores[f][2]};{lista_entrenadores[f][3]};{lista_entrenadores[f][4]};{lista_entrenadores[f][5]};{lista_entrenadores[f][6]};{lista_entrenadores[f][7]}\n")
 
 
-        txt_entrenadores.close()    
-    
+        txt_entrenadores.close()
+
+
+
+
+
+        # paso 4
+        if len(self.jugadores) >= 11 and self.entrenador != None:
+            self.calcular_fuerza()
 
 
 
@@ -428,92 +469,88 @@ class Seleccion:
 
     #R: Como minimo debe tener un entrenador y un jugador
 
-    def calcular_fueza(self):
+    def calcular_fuerza(self):
     # ------------------------------
 
         """
         Descripcion ;
 
-        1. se validara primero que la plantilla tenga como minimo 11 jugadores y que por lo menos este un entrenador en la plantilla antes de realizar el calculo
+        1. se buscara a los 11 jugadores con mayor puntaje de la plantilla.
 
-        2. se buscara a los 11 jugadores con mayor puntaje de la plantilla
+        2. se realizara el calculo de la fuerza de objeto Seleccion especifico  |  sera neceario: 11 Jugadores, Un entrenador, La posicion actual del pais
 
-        3. se realizara el calculo de la fuerza de objeto Seleccion especifico  |  sera neceario: 11Jugadores, Un entrenador, La posicion actual del pais
-        """
+        """ 
+
+        
+
+        if len(self.jugadores) >= 11 and self.entrenador != None:
 
 
-        if not Datos.inicio:
 
             # Variables
             titulares = []
             jugador_seleccionado = None
             lista_jugadores = []
             jugadores_seleccion = self.jugadores
+                
             suma_total = 0
 
             c = 1
-            c1 = 0
+            f = 0
 
-
+                
 
             # paso 1
-            if len(self.jugadores) < 11 or self.entrenador == None:
-                return f"Error, no se puede calcular la fuerza ya que no contiene los requisitos minimos. (11 jugadores y un Entrenador en la Seleccion)"
-            
-
-
-            
-
-            # paso 2
             while c <= 11:
 
                 jugador_seleccionado = None
                 lista_jugadores = []
-                
+                    
 
 
                 for c1 in range(len(jugadores_seleccion)):
 
                     if jugador_seleccionado == None:
                         jugador_seleccionado = jugadores_seleccion[c1]
-                    
+                        
 
 
 
                     if c1 + 1 < len(jugadores_seleccion):
                         if jugador_seleccionado.calidad >jugadores_seleccion[c1 + 1].calidad:
-                            lista_jugadores.append(jugadores_seleccion[c1 + 1])
-                        
+                                lista_jugadores.append(jugadores_seleccion[c1 + 1])
+                            
                         else:
                             lista_jugadores.append(jugador_seleccionado)
                             jugador_seleccionado = jugadores_seleccion[c1 + 1]
 
 
                     else:
-
-                        titulares.append(jugador_seleccionado)
-                
+                        if jugador_seleccionado != []:
+                            titulares.append(jugador_seleccionado)
+                    
 
 
                 jugadores_seleccion = lista_jugadores
                 c += 1
 
 
-        
+            
 
 
-            # paso 3
+
+            # paso 2
             for jugador in titulares:
 
                 suma_total += jugador.calidad
-            
+                
             promedio_jugadores = suma_total / 11
 
 
             factor_entrenador = self.entrenador.experiencia * 4
             if factor_entrenador > 100:
                 factor_entrenador = 100
-            
+                
 
             factor_ranking = 100 - self.pais.ranking_fifa
 
@@ -521,14 +558,10 @@ class Seleccion:
 
             if self.fuerza_equipo > 100:
                 self.fuerza_equipo = 100
-            
+                
             else:
                 if self.fuerza_equipo < 1:
                     self.fuerza_equipo = 1
-        
-
-
-        
 
 
 #################################################################################################################################
@@ -612,6 +645,6 @@ def registrar_seleccion(codigo_equipo, nombre_pais):
 
 
         txt_selecciones = open("selecciones.txt", "a")
-        txt_selecciones.write(f"{codigo_equipo};{nombre_pais}\n")
+        txt_selecciones.write(f"{codigo_equipo};{nombre_pais};0;0;0;0\n")
 
         txt_selecciones.close()

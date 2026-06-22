@@ -1,2 +1,13 @@
-Rambo;Rafael;23/05/2020;Costarricense;23;POR;78;FCRF;0;0;2;3
 Anton;Hernandez;23/03/2003;Argentino;10;DC;76;RAF;0;0;0;0
+Keylor;Navas;15/12/1986;Costarricense;1;POR;91;FCRF;0;0;0;0
+Francisco;Calvo;08/07/1992;Costarricense;15;DFC;84;FCRF;0;0;0;0
+Juan Pablo;Vargas;06/06/1995;Costarricense;4;DFC;83;FCRF;0;0;0;0
+Carlos;Martinez;30/03/1999;Costarricense;22;LD;80;FCRF;0;0;0;0
+Joseph;Mora;15/01/1993;Costarricense;8;LI;81;FCRF;0;0;0;0
+Celso;Borges;27/05/1988;Costarricense;5;MC;85;FCRF;0;0;0;0
+Yeltsin;Tejeda;17/03/1992;Costarricense;14;MCD;82;FCRF;0;0;0;0
+Brandon;Aguilera;28/06/2003;Costarricense;20;MCO;83;FCRF;0;0;0;0
+Joel;Campbell;26/06/1992;Costarricense;12;ED;86;FCRF;0;0;0;0
+Anthony;Contreras;29/01/2000;Costarricense;9;DC;82;FCRF;0;0;0;0
+Manfred;Ugalde;25/05/2002;Costarricense;19;EI;87;FCRF;0;0;0;0
+Erner;Martines;12/09/1889;Costarricense;44;FDC;67;FCRF;0;0;0;0

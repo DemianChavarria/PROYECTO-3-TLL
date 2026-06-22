@@ -1,2 +1,2 @@
-FCRF;Costa Rica
-RAF;Argentina
+FCRF;Costa Rica;0;0;0;0
+RAF;Argentina;0;0;0;0
