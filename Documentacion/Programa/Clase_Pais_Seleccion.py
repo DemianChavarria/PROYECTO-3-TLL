@@ -1,7 +1,7 @@
 # Modulos
 import Datos
 
-from Modulo_Persona_FUT_ENT import Futbolista, Entrenador
+from Clase_Persona_FUT_ENT import Futbolista, Entrenador
 
 
 
@@ -127,6 +127,7 @@ class Seleccion:
                 self.jugadores = []
 
                 # Bloque, gestionado por el programa
+                self.titulares = [] 
                 self.total_goles_afavor = 0
                 self.total_goles_encontra = 0
                 self.total_tarjetas_amarillas = 0
@@ -477,7 +478,9 @@ class Seleccion:
 
         1. se buscara a los 11 jugadores con mayor puntaje de la plantilla.
 
-        2. se realizara el calculo de la fuerza de objeto Seleccion especifico  |  sera neceario: 11 Jugadores, Un entrenador, La posicion actual del pais
+        2. los jugadores titulares se guardaran en la lista de titulares del objeto seleccion
+
+        3. se realizara el calculo de la fuerza de objeto Seleccion especifico  |  sera neceario: 11 Jugadores, Un entrenador, La posicion actual del pais
 
         """ 
 
@@ -536,10 +539,15 @@ class Seleccion:
 
 
             
-
-
-
+            
             # paso 2
+            self.titulares = titulares
+
+
+
+
+
+            # paso 3
             for jugador in titulares:
 
                 suma_total += jugador.calidad
@@ -562,6 +570,41 @@ class Seleccion:
             else:
                 if self.fuerza_equipo < 1:
                     self.fuerza_equipo = 1
+    
+
+
+
+
+    # Objetivo; Guardar datos estadisticos de la seleccion para cada partido durante toda la competicion
+
+    #E: recibe los parametros relacionados conteo de goles y conteo de tarjetas durante la competicion
+
+    #S: retorna el total de goles a favor y en contra  |  tambien el total de tarjetas recibidas
+
+    #R: ninguna
+
+    def registrar_resultados(self, goles_afavor, goles_encontra, tarjetas_Amarillas, tarjetas_Rojas):
+    # ------------------------------
+    
+        # Variables
+        txt_selecciones = []
+
+        self.total_goles_afavor += goles_afavor
+        self.total_goles_encontra += goles_encontra
+        self.total_tarjetas_amarillas += tarjetas_Amarillas
+        self.total_tarjetas_rojas += tarjetas_Rojas
+
+
+
+
+
+        txt_selecciones = open("selecciones.txt", "w")
+        for c in range(len(Datos.g_selecciones)):
+
+            txt_selecciones.write(f"{Datos.g_selecciones[c].codigo_equipo};{Datos.g_selecciones[c].pais};{Datos.g_selecciones[c].total_goles_afavor};{Datos.g_selecciones[c].total_goles_encontra};{Datos.g_selecciones[c].total_tarjetas_amarillas};{Datos.g_selecciones[c].total_tarjetas_rojas}\n")
+
+        txt_selecciones.close()
+
 
 
 #################################################################################################################################

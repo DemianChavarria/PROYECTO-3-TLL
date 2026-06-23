@@ -223,7 +223,60 @@ class Futbolista(Persona):
             return f"Error, los datos del futbolista no son validos"
 
     
-    # Faltaria, registrar goles, asistencias y tarjetas obtenidas en funciones diferentes
+    
+
+
+
+    # Objetivo; registrar goles, asistencias y tarjetas obtenidas del objeto jugador
+
+    #E: recibe los parametros para el conteo de goles, asistencias y tarjetas durante toda la competicion
+
+    #S: retorna el total de goles anotados, asistencias y tarjetas obtenidas para el objeto, posteriormente se guardara en el archivo de texto correspondiente a "jugadres.txt" 
+
+    #R: ninguna
+
+    def registrar_estadistica(self, goles, asistencias, tarjeta_amarilla, tarjeta_roja):
+    # ------------------------------
+    
+
+        # Variables
+        txt_jugadores = []
+        lista_jugadores = []
+
+
+        self.goles += goles
+        self.asistencias += asistencias
+        self.tarjeta_amarilla += tarjeta_amarilla
+        self.tarjeta_roja += tarjeta_roja
+
+
+
+
+        txt_jugadores = open("jugadores.txt", "r")
+        for linea in txt_jugadores:
+
+            jugador = linea.strip().split(";")
+
+            if jugador[3] == self.nacionalidad:
+                if jugador[0] == self.nombre and jugador[1] == self.apellido:
+                    
+                    jugador[8] = self.goles
+                    jugador[9] = self.asistencias
+                    jugador[10] = self.tarjeta_amarilla
+                    jugador[11] = self. tarjeta_roja
+
+            lista_jugadores.append(jugador)
+        
+        txt_jugadores.close()
+
+
+
+        txt_jugadores = open("jugadores.txt", "w")
+        for f in range(len(lista_jugadores)):
+
+            txt_jugadores.write(f"{lista_jugadores[f][0]};{lista_jugadores[f][1]};{lista_jugadores[f][2]};{lista_jugadores[f][3]};{lista_jugadores[f][4]};{lista_jugadores[f][5]};{lista_jugadores[f][6]};{lista_jugadores[f][7]};{lista_jugadores[f][8]};{lista_jugadores[f][9]};{lista_jugadores[f][10]};{lista_jugadores[f][11]}\n")
+
+        txt_jugadores.close()
 
 #################################################################################################################################
 

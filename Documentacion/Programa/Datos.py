@@ -4,6 +4,6 @@
 inicio = True
 
 
-# Datos 
+# Datos generales
 g_paises = []
 g_selecciones = []

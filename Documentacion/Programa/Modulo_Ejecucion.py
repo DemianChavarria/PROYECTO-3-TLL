@@ -1,9 +1,9 @@
 # Importar modulos
 import Datos
 
-from Modulo_Paises_Seleccion import registrar_pais, registrar_seleccion
+from Clase_Pais_Seleccion import registrar_pais, registrar_seleccion
 from Modulo_int_str import entero
-from Modulo_Persona_FUT_ENT import Futbolista, Entrenador
+from Clase_Persona_FUT_ENT import Futbolista, Entrenador
 
 
 
@@ -93,13 +93,24 @@ def Crear_seleccion():
     """
     Descripcion ; se creara el objeto seleccion con toda su informacion necesaria: entrenador y jugadores.
 
-    Primero se creara el objeto seleccion
-    Segundo se abrira el archivo de texto relacionado a entrenadores.txt y buscara al entrenador relacionado al atributo del equipo del objeto de seleccion
-    si lo encuentra entonces creara el objeto y lo guardara en Seleccion
-    Tercero se abrira el archivo de texto relacionado a jugadores.txt y buscara a todos los juagdores que esten relacionados al atributo codigo_equipo
-    de la seleccion, de poder encontrarlo entonces se creara el objeto y se añadira a la lista de jugadores
+    1. Primero se creara el objeto seleccion.
+
+    
+    2. Segundo se abrira el archivo de texto relacionado a entrenadores.txt y buscara al entrenador relacionado al atributo del equipo del objeto de seleccion
+    si lo encuentra entonces creara el objeto y lo guardara en Seleccion.
+    
+
+    3. Tercero se abrira el archivo de texto relacionado a jugadores.txt y buscara a todos los juagdores que esten relacionados al atributo codigo_equipo
+    de la seleccion, de poder encontrarlo entonces se creara el objeto y se añadira a la lista de jugadores.
+
+    4. se devolvera al paso 1 hasta que deje de cumplirse la condicion  |  hasta haberse creado todos los objetos de seleccion y sus objetos relacionados
+
     """
 
+
+
+
+    # paso 1
     for linea in txt_selecciones:
         seleccion = linea.strip().split(";")
 
@@ -111,8 +122,10 @@ def Crear_seleccion():
         Datos.g_selecciones[f1].total_tarjetas_rojas = entero(seleccion[5])
 
 
-
-
+        
+        
+        
+        #paso 2
         txt_entrenadores = open("entrenadores.txt", "r")
         for linea in txt_entrenadores:
             entrenador = linea.strip().split(";")
@@ -121,9 +134,12 @@ def Crear_seleccion():
                 Datos.g_selecciones[f1].entrenador = Entrenador(entrenador[0], entrenador[1], entrenador[2], entrenador[3], entrenador[4], entero(entrenador[5]), entrenador[6])
         txt_entrenadores.close()
 
-
-
-
+        
+        
+        
+        
+        
+        # paso 3
         txt_jugadores = open("jugadores.txt", "r")
         for linea in txt_jugadores:
             jugador = linea.strip().split(";")
@@ -139,10 +155,26 @@ def Crear_seleccion():
         txt_jugadores.close()
             
            
+        
+        
+        
         f1 += 1
         # podria indicar otras cosas mas
     
     txt_selecciones.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def imprimir():  # prueba
