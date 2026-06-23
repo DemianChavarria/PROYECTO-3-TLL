@@ -97,6 +97,7 @@ class Futbolista(Persona):
                     self.calidad = puntaje_individual
                         
                     # datos manejados por el programa
+                    self.tarjeta_adquirida = 0
                     self.tarjeta_amarilla = 0    
                     self.tarjeta_roja = 0        
                     self.goles = 0             
