@@ -99,12 +99,13 @@ def calcular_tabla(self):
 
         return f"No hay partidos para calcular la tabla de puntos."
 # self.__equipos | tipo: lista, contiene: objetos de la clase Seleccion, quién la usa: Grupo.
-# puntosPorJugador | tipo: diccionario, contiene: claves (string codigo_equipo) y valores (int puntos), quién la usa: Grupo.
-    puntosPorJugador = {}
+# puntos_por_equipo | tipo: diccionario, contiene: claves (string codigo_equipo) y valores (int puntos), quién la usa: Grupo.
+    puntos_por_equipo = {}
 
     for equipo in self.__equipos:
 
-        puntosPorJugador[equipo.codigo_equipo] = 0
+        puntos_por_equipo[equipo.codigo_equipo] = 0
+
 
 
 
@@ -114,17 +115,21 @@ def calcular_tabla(self):
 #Si el equipo 1 gana, se le asignan 3 puntos al equipo 1, si empatan se le asigna 1 punto a cada equipo, y si gana el equipo 2 se le asignan 3 puntos al equipo 2.
         if partido.goles_1 > partido.goles_2:
 
-            puntosPorJugador[partido.equipo_1.codigo_equipo] += 3
+            puntos_por_equipo[partido.equipo_1.codigo_equipo] += 3
 #Si el equipo 1 y el equipo 2 empatan, se le asigna 1 punto a cada equipo.
         if partido.goles_1 == partido.goles_2:
 
-            puntosPorJugador[partido.equipo_1.codigo_equipo] +=1
+            puntos_por_equipo[partido.equipo_1.codigo_equipo] +=1
 
-            puntosPorJugador[partido.equipo_2.codigo_equipo] +=1
+            puntos_por_equipo[partido.equipo_2.codigo_equipo] +=1
 #Si el equipo 2 gana, se le asignan 3 puntos al equipo 2.
         if partido.goles_1 < partido.goles_2:
 
-            puntosPorJugador[partido.equipo_2.codigo_equipo] += 3
+            puntos_por_equipo[partido.equipo_2.codigo_equipo] += 3
+
+#Usamos el método ordenar_tabla para ordenar la tabla de puntos de los equipos en el grupo de mayor a menor.
+
+    self.ordenar_tabla(puntos_por_equipo)
         
 
 #Método para ordenar la tabla de puntos de los equipos en el grupo:
@@ -137,11 +142,8 @@ def calcular_tabla(self):
 
 #Restricciones: La tabla de puntos debe estar calculada previamente.
 
-def ordenar_tabla(self, puntosPorJugador):
+def ordenar_tabla(self, puntos_por_equipo):
 
-    for equipo in self.__equipos:
-
-        puntos_de_equipo = puntosPorJugador[equipo.codigo_equipo]
 
     for i in range(len(self.__equipos)):
 
@@ -151,14 +153,22 @@ def ordenar_tabla(self, puntosPorJugador):
 
             equipo_2 = self.__equipos[j]
 
-            temporal = self.__equipos[i]
+            #Variables que almacenan los puntos de cada equipo para poder compararlos y ordenarlos.
+            puntos_1 = puntos_por_equipo[equipo_1.codigo_equipo]
+
+            puntos_2 = puntos_por_equipo[equipo_2.codigo_equipo]
+
+            if puntos_1 < puntos_2:
+
+                # Intercambiar posiciones en la lista de equipos
+                self.__equipos[i] = equipo_2
+
+                self.__equipos[j] = equipo_1
 
 
-            if equipo_1.[puntos_de_equipo] > equipo_2.[puntos_de_equipo]:
 
-                self.__equipos[i] = self.__equipos[j]
+       
 
-            if equipo_1.[puntos_de_equipo] < equipo_2.[puntos_de_equipo]:
 
-                self.__equipos[j] = temporal
+            
         
