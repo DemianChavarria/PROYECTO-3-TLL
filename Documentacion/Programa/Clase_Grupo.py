@@ -165,6 +165,25 @@ def ordenar_tabla(self, puntos_por_equipo):
 
                 self.__equipos[j] = equipo_1
 
+#Objetivo: Retornar para TKINTER la tabla de posiciones del grupo ya ordenada.
+#Entrada: puntos_por_equipo (diccionario con los puntos de cada selección).
+#Salida: Retorna el nombre del país y sus puntos acumulados.
+#Restricciones: La lista self.__equipos debe estar ordenada y el diccionario debe tener los puntos.
+
+    def mostrar_tabla(self, puntos_por_equipo):
+
+        tabla = []
+
+        for equipo in self.__equipos:
+
+            puntos = puntos_por_equipo[equipo.codigo_equipo]
+
+            tabla = tabla.append(equipo.pais.nombre_pais)
+
+            
+
+        return tabla
+
 
 
        
