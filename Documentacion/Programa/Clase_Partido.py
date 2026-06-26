@@ -19,10 +19,12 @@ class Partido:
         self.equipo_2 = equipo_2
         self.goles_1 = 0
         self.goles_2 = 0
-        self.fecha = None
+        self.penales_1 = 0
+        self.penales_2 = 0
 
         # esto puede cambiar
-        self.fase = "Grupos"
+        self.fecha = None
+        self.fase = "Octavos"
         self.id_partido = None
     
 
@@ -122,8 +124,8 @@ class Partido:
         tiempo_partido = 2
         titulares_1 = self.equipo_1.titulares
         titulares_2 = self.equipo_2.titulares
-        fuerza_equipo_1 = self.equipo_1.fuerza_equipo
-        fuerza_equipo_2 = self.equipo_2.fuerza_equipo
+        fuerza_equipo_1 = (self.equipo_1.fuerza_equipo) // 1
+        fuerza_equipo_2 = (self.equipo_2.fuerza_equipo) // 1
         gol_obtenido_1 = 0
         gol_obtenido_2 = 0
         cambio_titulares = []
@@ -137,8 +139,16 @@ class Partido:
             
             
             # paso 2
-            diferencia = fuerza_equipo_1 - fuerza_equipo_2
+            if fuerza_equipo_1 > fuerza_equipo_2:
+                diferencia = fuerza_equipo_1 - fuerza_equipo_2
 
+            else:
+                diferencia = fuerza_equipo_2 - fuerza_equipo_1
+
+
+            print(diferencia)
+            print(tiempo_tarnscurrido)
+            print(tiempo_partido)
 
 
 
@@ -194,7 +204,7 @@ class Partido:
 
                 for gol in range(gol_obtenido_2):
 
-                    goleador = titulares_1[random.randint(0, len(titulares_1) - 1)]
+                    goleador = titulares_2[random.randint(0, len(titulares_2) - 1)]
                     goleador.registrar_estadistica(1, 0, 0, 0)
 
                     asistencia = True
@@ -210,8 +220,8 @@ class Partido:
             self.goles_1 += gol_obtenido_1
             self.goles_2 += gol_obtenido_2
 
-            self.equipo_1.registrar_resultados(self.goles_1, self.goles_2, 0, 0)
-            self.equipo_2.registrar_resultados(self.goles_2, self.goles_1, 0, 0)
+            self.equipo_1.registrar_resultados(gol_obtenido_1, gol_obtenido_2, 0, 0)
+            self.equipo_2.registrar_resultados(gol_obtenido_2, gol_obtenido_1, 0, 0)
 
             gol_obtenido_1 = 0
             gol_obtenido_2 = 0
@@ -247,7 +257,7 @@ class Partido:
 
                     if jugador.tarjeta_adquirida % 2 == 0:
                         jugador.registrar_estadistica(0, 0, 0, 1)
-                        equipo_asosciado.registrar_resultado(0, 0, 0, 1)
+                        equipo_asosciado.registrar_resultados(0, 0, 0, 1)
 
                         if jugador.calidad <= 60:
                             fuerza_equipo -= 5
@@ -281,7 +291,7 @@ class Partido:
                         jugador = titulares[random.randint(0, len(titulares) - 1)]
 
                         jugador.registrar_estadistica(0, 0, 0, 1)
-                        equipo_asosciado.registrar_resultado(0, 0, 0, 1)
+                        equipo_asosciado.registrar_resultados(0, 0, 0, 1)
 
                         if jugador.calidad <= 60:
                             fuerza_equipo -= 5
@@ -314,9 +324,12 @@ class Partido:
 
             # paso 6
             if tiempo_tarnscurrido == 2:
-                if not self.fase == "Grupos":
+                if self.fase != "Grupos":
                     if self.goles_1 == self.goles_2:
                         tiempo_partido += 1
+                        tiempo_tarnscurrido += 1
+                    
+                    else:
                         tiempo_tarnscurrido += 1
                 
                 else:
@@ -405,11 +418,11 @@ class Partido:
             
 
             
-            res_penal_1 += gol_obtenido_1
-            res_penal_2 += gol_obtenido_2
+            self.penales_1 += gol_obtenido_1
+            self.penales_2 += gol_obtenido_2
 
-            self.equipo_1.registrar_resultados(res_penal_1, res_penal_2, 0, 0)
-            self.equipo_2.registrar_resultados(res_penal_2, res_penal_1, 0, 0)
+            self.equipo_1.registrar_resultados(self.penales_1, self.penales_2, 0, 0)
+            self.equipo_2.registrar_resultados(self.penales_2, self.penales_1, 0, 0)
 
             gol_obtenido_1 = 0
             gol_obtenido_2 = 0
@@ -417,14 +430,14 @@ class Partido:
 
 
             # paso 4
-            if res_penal_1 != res_penal_2:
+            if self.penales_1 != self.penales_2:
 
                 continuar = False
         
 
 
         # paso 5
-        resultado = f"{self.equipo_1.pais.nombre_pais} {self.goles_1} - {self.goles_2} {self.equipo_2.pais.nombre_pais} | Penales: ({res_penal_1}-{res_penal_2})"
+        resultado = f"{self.equipo_1.pais.nombre_pais} {self.goles_1} - {self.goles_2} {self.equipo_2.pais.nombre_pais} | Penales: ({self.penales_1}-{self.penales_2})"
         return resultado
 
 

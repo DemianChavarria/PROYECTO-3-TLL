@@ -1,2 +1,2 @@
-FCRF;Costa Rica;26;28;0;0
-ARGF;Argentina;28;26;0;0
+FCRF;Costa Rica;24206;31062;36;28
+ARGF;Argentina;31062;24206;37;26
