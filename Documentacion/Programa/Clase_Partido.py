@@ -1,4 +1,5 @@
 import random
+import Datos
 
 
 #################################################################################################################################
@@ -12,7 +13,7 @@ import random
 # Clase Partido
 class Partido:
 
-    def __init__(self, equipo_1, equipo_2):
+    def __init__(self, equipo_1, equipo_2, fase):
         
 
         self.equipo_1 = equipo_1
@@ -22,10 +23,45 @@ class Partido:
         self.penales_1 = 0
         self.penales_2 = 0
 
-        # esto puede cambiar
-        self.fecha = None
-        self.fase = "Octavos"
+        self.fase = fase
+
+        # no se decide
         self.id_partido = None
+
+
+
+
+        """
+        Descripcion ; lo que se intentara es obtener una fecha automatica en funcion de la fase actual del torneo
+
+        1. si el inicio del programa es true, no realizara este calculo  |  si es false, entonces si realizara el calculo
+        """
+        Datos.inicio = False
+        if not Datos.inicio:
+
+            if self.fase == "Grupos":
+                
+                self.fecha = f"{random.randint(1, 30)}/06/2026"
+
+            if self.fase == "Dieciseisavos":
+
+                self.fecha = f"{random.randint(1, 20)}/07/2026"
+                
+            elif self.fase == "Octavos":
+
+                self.fecha = f"{random.randint(21, 30)}/07/2026"
+            
+            elif self.fase == "Cuartos":
+
+                self.fecha = f"{random.randint(1, 5)}/08/2026"
+
+            elif self.fase == "Semifinales":
+
+                self.fecha = f"{random.randint(6, 7)}/06/2026"
+            
+            else:
+
+                self.fecha = "10/06/2026"
     
 
 
@@ -63,13 +99,34 @@ class Partido:
         # validacion previa
         if self.equipo_1.entrenador == None or self.equipo_2.entrenador == None:
             return f"Error, algunos de los equipos no tiene los requisitos para iniciar el partido"
+        
+        if len(self.equipo_1.titulares) < 11 or len(self.equipo_2.titulares) < 11:
+            return f"Error, algunos de los equipos no tiene los requisitos para iniciar el partido"
+        
 
-
-
-
+        
+        
         resultado = self.simular()
 
         self.mostrar_resultado(resultado)
+
+
+
+
+        # variables
+
+        txt_partidos = []
+
+
+        """
+        Descripcion ; se guardara el resultado del partido en su archivo de texto correspondiente a "partidos.txt"
+
+        Nota: el partido debe estar anterriormete registrado en "partidos.txt"
+        """
+
+
+
+
 
         if self.goles_1 > self.goles_2:
             return self.equipo_1
@@ -175,6 +232,7 @@ class Partido:
             else:
                 gol_obtenido_1 += random.randint(0, 4)
                 gol_obtenido_2 += random.randint(0, 4)
+
 
 
 

@@ -28,6 +28,7 @@ El orden de ejecucion ira de esta manera:
 
 1. Crear los paises
 2. Crear las selecciones  |  necesita pais, entrenador y jugadores
+3. crear los partidos
 
 
 3. probablemete mas pasos
@@ -198,4 +199,4 @@ Crear_paises()
 Crear_seleccion()
 imprimir()
 
-partido1 = Partido(Datos.g_selecciones[0], Datos.g_selecciones[1])
+partido1 = Partido(Datos.g_selecciones[0], Datos.g_selecciones[1], "Grupos")
