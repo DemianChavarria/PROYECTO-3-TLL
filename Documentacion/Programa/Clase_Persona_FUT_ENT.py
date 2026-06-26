@@ -17,49 +17,36 @@ import Datos
 class Persona:
 
     def __init__(self, nombre, apellido, fecha_nacimiento, nacionalidad):
+            
 
-        if isinstance(nombre, str) and isinstance(apellido, str) and (fecha_nacimiento, str) and isinstance(nacionalidad, str):
 
-            # validar que no hay repeticion:
+            if not isinstance(nombre, str):
+
+                raise ValueError("Error, El nombre es invalido")
+            
+            if not isinstance(apellido, str):
+
+                raise ValueError("Error, El apellido es invalido")
+            
+            if not isinstance(fecha_nacimiento, str):
+
+                raise ValueError("Error, La fecha de nacimiento es invalida")
+            
+            if not isinstance(nacionalidad, str):
+
+                raise ValueError("Error, La nacionalidad es invalida")
+
+
+
+
+
+
+
             self.nombre = nombre
             self.apellido = apellido
             self.fecha_nacimiento = fecha_nacimiento
             self.nacionalidad = nacionalidad
 
-        else:
-            return (f"Error, los datos ingresados de la persona no son validos")
-    
-
-
-    """
-    # Objetivo ; mostrar informacion del objeto relacionado a persona
-
-    #E: No recibe parametros aparte de si mismo
-
-    #S: retorna la informacion especifica del objeto persona
-
-    #R: el nombre, apellido, fecha de nacimiento y nacionalidad deben ser strings(str)
-
-    def mostrar(self):
-    # ------------------------------
-
-        return f"------------------------------\n Nombre : {self.nombre}\n Apellido : {self.apellido}\n Fecha de Nacimiento: {self.fecha_nacimiento}\n Nacionalidad: {self.nacionalidad}"
-       
-
-
-#--Version de Darshan:
-#Objetivo: Mostrar los datos de un objeto en especifico.
-
-#E: No hay un parametro como tal, sería un objeto.
-
-#R: El objeto debe estar creado con todos sus atributos definidos.
-
-#S: Un f-string que muestra los atributos del objeto.
-
-    def mostrar_datos(self):
-        
-        return f" Código fifa: {self.__codigo_fifa} \n Nombre de país: {self.__nombre_pais} \n Continente (Confederación a la que pertenece): {self.__continente} \n Ranking fifa: {self.__ranking_fifa}"
-    """
 
 #################################################################################################################################
 #################################################################################################################################
@@ -78,43 +65,32 @@ class Futbolista(Persona):
         super().__init__(nombre, apellido, fecha_nacimiento, nacionalidad)
 
 
+        if not isinstance(dorsal, int) or not dorsal >= 0 or not dorsal <= 99:
 
-
-        if isinstance(dorsal, int) and isinstance(posicion, str) and isinstance(puntaje_individual, int):
-
-
-            if dorsal >= 0 and dorsal <= 99:
-
-
-                if puntaje_individual >= 0 and puntaje_individual <= 100:
-
-
-
-
-                    # datos manejados por el usuario
-                    self.dorsal = dorsal
-                    self.posicion = posicion
-                    self.calidad = puntaje_individual
-                        
-                    # datos manejados por el programa
-                    self.tarjeta_adquirida = 0
-                    self.tarjeta_amarilla = 0    
-                    self.tarjeta_roja = 0        
-                    self.goles = 0             
-                    self.asistencias = 0
-
-
-                else:
-                    return f"Error, no se permiten esteroides ni bebidas energizantes"
-
-            else:
-                return f"Error, Limte del dorsal solo de 0 a 99"     
+            raise ValueError("Error, El dorsal es invalido")
         
-        else:
-            return f"Error, los datos del futbolista no son validos"
-    
+        if not isinstance(posicion, str):
+
+            raise ValueError("Error, La posicion es invalida")
+        
+        if not isinstance(puntaje_individual, int) or not puntaje_individual > 0 or not puntaje_individual <= 100:
+
+            raise ValueError("Error, El puntaje individual es invalido")
+        
 
 
+
+        # datos manejados por el usuario
+        self.dorsal = dorsal
+        self.posicion = posicion
+        self.calidad = puntaje_individual
+                        
+        # datos manejados por el programa
+        self.tarjeta_adquirida = 0
+        self.tarjeta_amarilla = 0    
+        self.tarjeta_roja = 0        
+        self.goles = 0             
+        self.asistencias = 0
 
 
 
@@ -289,24 +265,26 @@ class Entrenador(Persona):
 
         super().__init__(nombre, apellido, fecha_nacimiento, nacionalidad)
 
+        if not isinstance(licencia, str):
+
+            raise ValueError("Error, la licencia es invalida")
+        
+        if not isinstance(años_experiencia, int) or not años_experiencia >= 0 or not años_experiencia <= 100:
+
+            raise ValueError("Error, los años de experiencias son invalidos")
+
+        if not isinstance(licencia, str):
+
+            raise ValueError("Error, la licencia es invalida")
 
 
-        if isinstance(licencia, str) and isinstance(años_experiencia, int) and isinstance(alineacion, str):
-
-            if años_experiencia <= 50:
-
-
-                self.licencia = licencia
-                self.experiencia = años_experiencia
-                self.alineacion = alineacion
+        self.licencia = licencia
+        self.experiencia = años_experiencia
+        self.alineacion = alineacion
                 
 
-            else:
-                return f"Error, nadie tiene mas de 50 años de experiencia"
-        
-        else:
-            return f"Error, los datos ingresados son invalidos"
-    
+
+
 
 
 
@@ -384,7 +362,7 @@ class Entrenador(Persona):
 
 
             else:
-                return f"Error, nadie tiene mas de 50 años de experiencia"
+                return f"Error, nadie tiene mas de 50 años de experiencia" 
         
         else:
             return f"Error, los datos ingresados son invalidos"
@@ -392,26 +370,3 @@ class Entrenador(Persona):
 
 #################################################################################################################################
 #################################################################################################################################
-
-
-"""
-#Objetivo: Mofificar los valores de cada atributo de un objeto.
-
-#E: Los parámetros están inicializados siendo equivalentes a "None", el usuario puede modificar a cada uno
-
-#R: ranking_fifa debe ser un integer | los demás parametros deben ser strings.
-
-#S: Los atributos de tal objeto actualizados.
-
-    def actualizar_datos(self, nuevo_codigo_fifa=None , nuevo_nombre_pais=None , nuevo_continente=None , nuevo_ranking_fifa=None):
-
-
-        if nuevo_codigo_fifa is not None:
-
-            if not isinstance(nuevo_codigo_fifa, str):
-
-                return ("Error")
-            
-
-            self.__codigo_fifa = nuevo_codigo_fifa
-"""

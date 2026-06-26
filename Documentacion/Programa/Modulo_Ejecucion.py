@@ -4,6 +4,7 @@ import Datos
 from Clase_Pais_Seleccion import registrar_pais, registrar_seleccion
 from Modulo_int_str import entero
 from Clase_Persona_FUT_ENT import Futbolista, Entrenador
+from Clase_Partido import Partido
 
 
 
@@ -191,10 +192,10 @@ def imprimir():  # prueba
         Datos.g_selecciones[c].calcular_fuerza()
         Datos.g_selecciones[c].mostrar_datos()
 
-
-
-
+    
 
 Crear_paises()
 Crear_seleccion()
 imprimir()
+
+partido1 = Partido(Datos.g_selecciones[0], Datos.g_selecciones[1])

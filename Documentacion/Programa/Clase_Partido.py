@@ -1,4 +1,3 @@
-import Datos
 import random
 
 
@@ -13,24 +12,18 @@ import random
 # Clase Partido
 class Partido:
 
-    def __init__(self, equipo_1, equipo_2, fecha):
-        
-        if isinstance(fecha, str):
-
-
-            self.equipo_1 = equipo_1
-            self.equipo_2 = equipo_2
-            self.goles_1 = 0
-            self.goles_2 = 0
-            self.fecha = fecha
-
-            self.fase = "Grupos"
-            self.id_partido = None
+    def __init__(self, equipo_1, equipo_2):
         
 
-        else:
-            return f"Error, La fecha es Invalida"
-        
+        self.equipo_1 = equipo_1
+        self.equipo_2 = equipo_2
+        self.goles_1 = 0
+        self.goles_2 = 0
+        self.fecha = None
+
+        # esto puede cambiar
+        self.fase = "Grupos"
+        self.id_partido = None
     
 
 
@@ -39,15 +32,16 @@ class Partido:
 
     #E: no recibe parametros aparte de si mismo
 
-    #S: retorna un f"string" que muestra el resultado el resultado de ambos equipos y los goles obtenidos
+    #S: retorna un f"string" que muestra el resultado de ambos equipos y los goles obtenidos
 
     #R: ninguna
 
-    def mostrar_resultado(self):
+    def mostrar_resultado(self, ganador):
     # ------------------------------
 
+        print(ganador)
+        
 
-        print(f"{self.equipo_1.pais.codigo_fifa} {self.goles_1} - {self.goles_2} {self.equipo_2.pais.codigo_fifa}")
 
 
 
@@ -64,21 +58,25 @@ class Partido:
     def generar_ganador(self):
     # ------------------------------
 
+        # validacion previa
+        if self.equipo_1.entrenador == None or self.equipo_2.entrenador == None:
+            return f"Error, algunos de los equipos no tiene los requisitos para iniciar el partido"
+
+
+
+
+        resultado = self.simular()
+
+        self.mostrar_resultado(resultado)
 
         if self.goles_1 > self.goles_2:
-
-            print(f"Gano: {self.equipo_1.pais.nombre_pais}")
             return self.equipo_1
 
-        elif self.equipo_1 < self.equipo_2:
-
-            print(f"Gano: {self.equipo_2.pais.nombre_pais}")
+        elif self.goles_2 > self.goles_1:
             return self.equipo_2
 
         else:
             if self.fase == "Grupos":
-
-                print(f"Empate")
                 return None
 
 
@@ -112,7 +110,7 @@ class Partido:
 
         5. por cada tiempo sera posible que la plantilla sufra penalizacion por faltas con tarjetas adquiridas durante la simulacion
 
-        6. en caso de empate se realizara otra simulacion con tiempo extra(1 tiempo)  |  el proceso repite el punto 2 en adelante hasta terminar el tiempo extra
+        6. en caso de empate se realizara otra simulacion con tiempo extra(1 tiempo)  |  el proceso repite el punto 2 en adelante hasta terminar el partido
 
         """
 
@@ -120,7 +118,6 @@ class Partido:
 
 
         # Variables
-        finalizar = False
         tiempo_tarnscurrido = 1
         tiempo_partido = 2
         titulares_1 = self.equipo_1.titulares
@@ -148,6 +145,8 @@ class Partido:
 
             # paso 3
             if diferencia > 15 and diferencia < 30:
+                
+                
                 if fuerza_equipo_1 > fuerza_equipo_2:
                     gol_obtenido_1 += random.randint(1, 3)
                     gol_obtenido_2 += random.randint(0, 2)
@@ -189,18 +188,19 @@ class Partido:
 
                             asistidor.registrar_estadistica(0, 1, 0, 0)
                             asistencia = False
-                    
+
+  
             if gol_obtenido_2 > 0:
 
                 for gol in range(gol_obtenido_2):
 
-                    goleador = titulares_1[random.randint(0, len(titulares_2) - 1)]
+                    goleador = titulares_1[random.randint(0, len(titulares_1) - 1)]
                     goleador.registrar_estadistica(1, 0, 0, 0)
 
                     asistencia = True
                     while asistencia:
 
-                        asistidor = titulares_1[random.randint(0, len(titulares_2) - 1)]
+                        asistidor = titulares_2[random.randint(0, len(titulares_2) - 1)]
                         if asistidor.nombre != goleador.nombre and asistidor.apellido != goleador.apellido:
 
                             asistidor.registrar_estadistica(0, 1, 0, 0)
@@ -209,6 +209,10 @@ class Partido:
 
             self.goles_1 += gol_obtenido_1
             self.goles_2 += gol_obtenido_2
+
+            self.equipo_1.registrar_resultados(self.goles_1, self.goles_2, 0, 0)
+            self.equipo_2.registrar_resultados(self.goles_2, self.goles_1, 0, 0)
+
             gol_obtenido_1 = 0
             gol_obtenido_2 = 0
 
@@ -237,11 +241,11 @@ class Partido:
                 if tarjeta <= 10 and tarjeta > 3:
 
                     jugador = titulares[random.randint(0, len(titulares) - 1)]
-                    jugador.tarjeta_obtenida += 1
+                    jugador.tarjeta_adquirida += 1
                     jugador.registrar_estadistica(0, 0, 1, 0)
                     equipo_asosciado.registrar_resultados(0, 0, 1, 0)
 
-                    if jugador.tarjeta_obtenida % 2 == 0:
+                    if jugador.tarjeta_adquirida % 2 == 0:
                         jugador.registrar_estadistica(0, 0, 0, 1)
                         equipo_asosciado.registrar_resultado(0, 0, 0, 1)
 
@@ -269,7 +273,7 @@ class Partido:
                             fuerza_equipo_2 = fuerza_equipo
 
                         cambio_titulares = []
-                        jugador.tarjeta_obtenida = 0
+                        jugador.tarjeta_adquirida = 0
                 
                 else:
                     if tarjeta <= 3:
@@ -303,18 +307,21 @@ class Partido:
                             fuerza_equipo_2 = fuerza_equipo
 
                         cambio_titulares = []
-                        jugador.tarjeta_obtenida = 0
+                        jugador.tarjeta_adquirida = 0
         
 
 
 
             # paso 6
             if tiempo_tarnscurrido == 2:
-                if self.fase != "Grupos":
-                    if self.goles_1 == self.goles_2 and not finalizar:
+                if not self.fase == "Grupos":
+                    if self.goles_1 == self.goles_2:
                         tiempo_partido += 1
-                        finalizar = True
-            
+                        tiempo_tarnscurrido += 1
+                
+                else:
+                    tiempo_tarnscurrido += 1
+
             else:
                 tiempo_tarnscurrido += 1
                 
@@ -322,11 +329,14 @@ class Partido:
 
 
 
+        if self.fase == "Grupos":
+            
+            resultado = f"{self.equipo_1.pais.nombre_pais} {self.goles_1} - {self.goles_2} {self.equipo_2.pais.nombre_pais}"
+            return resultado
 
 
 
 
-                        
 
 
 
@@ -335,10 +345,89 @@ class Partido:
 
 
 
+        """
+        Descripcion ;  si resulta que estamos en una fase eliminatoria y no en fase de grupos, ambos equipos jugaran una tanda de penales 
+        hasta que uno sea el vencedor
+
+        1. validar que ambos equipos no tengan la misma cantidad de goles.
+
+        2. simular una tanda de penales de (2, 5) en ambos equipos.
+ 
+        3. la cantidad de goles obtenidos se pasara a los goleadores y posteiormente a las estadisticas de la seleccion.
+
+        4. se validara el resultado del calculo y si resulta parejo se repetira el punto 2 hasta obtener una diferencia en en ambos equipos.
+
+        5. se llamara el metodo generar_ganador() y luego se mostrara el resultado de la tanda de penales por aparte.
+
+        """
+
+
+
+        # variables
+        gol_obtenido_1 = 0
+        gol_obtenido_2 = 0
+        res_penal_1 = 0
+        res_penal_2 = 0
+        continuar = True
+        
+
+
+        # paso 1
+        if self.goles_1 != self.goles_2:
+            
+            resultado = f"{self.equipo_1.pais.nombre_pais} {self.goles_1} - {self.goles_2} {self.equipo_2.pais.nombre_pais}"
+            return resultado
         
 
 
 
+        # paso 2
+        while continuar:
+
+
+            gol_obtenido_1 = random.randint(2, 5)
+            gol_obtenido_2 = random.randint(2, 5)
+
+
+
+
+            # paso 3
+            for gol in range(gol_obtenido_1):
+
+                goleador = titulares_1[random.randint(0, len(titulares_1) - 1)]
+                goleador.registrar_estadistica(1, 0, 0, 0)
             
+            
+            for gol in range(gol_obtenido_2):
+
+                goleador = titulares_2[random.randint(0, len(titulares_2) - 1)]
+                goleador.registrar_estadistica(1, 0, 0, 0)
             
 
+            
+            res_penal_1 += gol_obtenido_1
+            res_penal_2 += gol_obtenido_2
+
+            self.equipo_1.registrar_resultados(res_penal_1, res_penal_2, 0, 0)
+            self.equipo_2.registrar_resultados(res_penal_2, res_penal_1, 0, 0)
+
+            gol_obtenido_1 = 0
+            gol_obtenido_2 = 0
+
+
+
+            # paso 4
+            if res_penal_1 != res_penal_2:
+
+                continuar = False
+        
+
+
+        # paso 5
+        resultado = f"{self.equipo_1.pais.nombre_pais} {self.goles_1} - {self.goles_2} {self.equipo_2.pais.nombre_pais} | Penales: ({res_penal_1}-{res_penal_2})"
+        return resultado
+
+
+
+
+            

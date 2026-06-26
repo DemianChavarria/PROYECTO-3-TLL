@@ -20,19 +20,35 @@ class Pais:
 
     def __init__(self, codigo_fifa, nombre_pais, continente, ranking_fifa):
 
+        
+        if not isinstance(codigo_fifa, str):
 
-        if isinstance(codigo_fifa, str) and isinstance(nombre_pais, str) and isinstance(continente, str) and isinstance(ranking_fifa, int):
-                
+            raise ValueError("Error, el codigo de la FIFA es invalido")
+        
+        if not isinstance(nombre_pais, str):
 
-            self.codigo_fifa = codigo_fifa      # Codigo de la FIFA
-            self.nombre_pais = nombre_pais      # Nombre del Pais
-            self.continente = continente        # Continente al que pertenece, Confederacion
-            self.ranking_fifa = ranking_fifa    # Su Posicion en el tabla del Mundial
+            raise ValueError("Error, el nombre del pais es invalido")
+        
+        if not isinstance(continente, str):
+
+            raise ValueError("Error, el continente es invalido")
+        
+        if not isinstance(ranking_fifa, int):
+
+            raise ValueError("Error, el ranking de la FIFA es invalido")
+        
+
 
     
-        else:
-            return f"Error, datos incorrectos"
-    
+
+        self.codigo_fifa = codigo_fifa      # Codigo de la FIFA
+        self.nombre_pais = nombre_pais      # Nombre del Pais
+        self.continente = continente        # Continente al que pertenece, Confederacion
+        self.ranking_fifa = ranking_fifa    # Su Posicion en el tabla del Mundial
+
+
+
+
 
 
 
@@ -109,34 +125,52 @@ class Pais:
 class Seleccion:
 
     def __init__(self, codigo_equipo, nombre_pais):
+        
 
-        if isinstance(codigo_equipo, str) and isinstance(nombre_pais, str):
-                
 
-                # buscara en el Modulo de base de datos el pais a incluir a la seleccion
-                for c in range(len(Datos.g_paises)):
 
-                    if Datos.g_paises[c].nombre_pais == nombre_pais:
-                        pais = Datos.g_paises[c]
+        if not isinstance(codigo_equipo, str):
 
-            
-                #Bloque, gestionado por el usuario
-                self.codigo_equipo = codigo_equipo
-                self.pais = pais
-                self.entrenador = None
-                self.jugadores = []
+            raise ValueError("Error, el codigo del equipo es invalido")
+        
+        if not isinstance(nombre_pais, str):
 
-                # Bloque, gestionado por el programa
-                self.titulares = [] 
-                self.total_goles_afavor = 0
-                self.total_goles_encontra = 0
-                self.total_tarjetas_amarillas = 0
-                self.total_tarjetas_rojas = 0
-                self.fuerza_equipo = 0
+            raise ValueError("Error, el nombre del pais es invalido")
+        
+
+
+
 
         
-        else:
-            return f"Error, los datos ingresados no son validos"
+        # buscara en el Modulo de base de datos el pais a incluir a la seleccion
+        for c in range(len(Datos.g_paises)):
+
+            if Datos.g_paises[c].nombre_pais == nombre_pais:
+                pais = Datos.g_paises[c]
+
+
+
+
+
+
+            
+        #Bloque, gestionado por el usuario
+        self.codigo_equipo = codigo_equipo
+        self.pais = pais
+        self.entrenador = None
+        self.jugadores = []
+
+        # Bloque, gestionado por el programa
+        self.titulares = [] 
+        self.total_goles_afavor = 0
+        self.total_goles_encontra = 0
+        self.total_tarjetas_amarillas = 0
+        self.total_tarjetas_rojas = 0
+        self.fuerza_equipo = 0
+
+
+
+
 
 
 
@@ -314,6 +348,9 @@ class Seleccion:
                     self.jugadores = lista_jugadores
                     lista_jugadores = []
 
+
+
+
                     """
                     Descripcion ; posterior a la eliminacion del jugador de la plantilla, se buscara en la base de datos para eliminarlo igualmente.
                     
@@ -325,6 +362,8 @@ class Seleccion:
                     3. se realizara una validacion previa antes de calcular la fuerza de equipo.
 
                     """
+
+
 
 
                     # paso 1
@@ -349,7 +388,7 @@ class Seleccion:
 
 
 
-                            lista_jugadores.write(f"{lista_jugadores[f][0]};{lista_jugadores[f][1]};{lista_jugadores[f][2]};{lista_jugadores[f][3]};{lista_jugadores[f][4]};{lista_jugadores[f][5]};{lista_jugadores[f][6]};{lista_jugadores[f][7]}\n")
+                            txt_jugadores.write(f"{lista_jugadores[f][0]};{lista_jugadores[f][1]};{lista_jugadores[f][2]};{lista_jugadores[f][3]};{lista_jugadores[f][4]};{lista_jugadores[f][5]};{lista_jugadores[f][6]};{lista_jugadores[f][7]}\n")
                     txt_jugadores.close()
 
 
@@ -601,7 +640,7 @@ class Seleccion:
         txt_selecciones = open("selecciones.txt", "w")
         for c in range(len(Datos.g_selecciones)):
 
-            txt_selecciones.write(f"{Datos.g_selecciones[c].codigo_equipo};{Datos.g_selecciones[c].pais};{Datos.g_selecciones[c].total_goles_afavor};{Datos.g_selecciones[c].total_goles_encontra};{Datos.g_selecciones[c].total_tarjetas_amarillas};{Datos.g_selecciones[c].total_tarjetas_rojas}\n")
+            txt_selecciones.write(f"{Datos.g_selecciones[c].codigo_equipo};{Datos.g_selecciones[c].pais.nombre_pais};{Datos.g_selecciones[c].total_goles_afavor};{Datos.g_selecciones[c].total_goles_encontra};{Datos.g_selecciones[c].total_tarjetas_amarillas};{Datos.g_selecciones[c].total_tarjetas_rojas}\n")
 
         txt_selecciones.close()
 
