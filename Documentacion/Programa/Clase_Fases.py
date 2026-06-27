@@ -15,3 +15,8 @@ import Datos
 
 
 # Clase Fases
+class Fase:
+
+    def __init__(self):
+        
+        pass
