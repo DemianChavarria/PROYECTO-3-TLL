@@ -74,6 +74,8 @@ class Partido:
 
 
 
+
+
         # variables
         txt_partidos = []
 
@@ -95,6 +97,9 @@ class Partido:
 
 
 
+
+
+
         if self.goles_1 > self.goles_2:
             return self.equipo_1
 
@@ -104,6 +109,8 @@ class Partido:
         else:
             if self.fase == "Grupos":
                 return None
+
+
 
 
 
