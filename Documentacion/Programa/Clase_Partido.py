@@ -39,19 +39,19 @@ class Partido:
         Datos.inicio = False
         if not Datos.inicio:
 
-            if self.fase == "Grupos":
+            if self.fase == "Fase de Grupos":
                 
                 self.fecha = f"{random.randint(1, 30)}/06/2026"
 
-            if self.fase == "Dieciseisavos":
+            if self.fase == "Dieciceisavos de Final":
 
                 self.fecha = f"{random.randint(1, 20)}/07/2026"
                 
-            elif self.fase == "Octavos":
+            elif self.fase == "Octavos de Final":
 
                 self.fecha = f"{random.randint(21, 30)}/07/2026"
             
-            elif self.fase == "Cuartos":
+            elif self.fase == "Cuartos de Final":
 
                 self.fecha = f"{random.randint(1, 5)}/08/2026"
 
@@ -498,7 +498,4 @@ class Partido:
         resultado = f"{self.equipo_1.pais.nombre_pais} {self.goles_1} - {self.goles_2} {self.equipo_2.pais.nombre_pais} | Penales: ({self.penales_1}-{self.penales_2})"
         return resultado
 
-
-
-
-            
+#################################################################################################################################

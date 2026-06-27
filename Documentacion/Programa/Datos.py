@@ -19,6 +19,8 @@ equipos_grupos_clasificados = []
 # Fase Eliminatorias
 # ------------------
 
+fases_txt = ["Fase de Grupos", "Dieciceisavos de Final", "Octavos de Final", "Cuartos de FInal", "Semifinales", "Final de la Copa del Mundo"]
+
 # Dieciceisavos
 partidos_16 = []
 Clasificados_16 = []
