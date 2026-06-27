@@ -166,23 +166,54 @@ def ordenar_tabla(self, puntos_por_equipo):
                 self.__equipos[j] = equipo_1
 
 #Objetivo: Retornar para TKINTER la tabla de posiciones del grupo ya ordenada.
-#Entrada: puntos_por_equipo (diccionario con los puntos de cada selección).
-#Salida: Retorna el nombre del país y sus puntos acumulados.
+#Entrada: puntos_por_equipo (diccionario con los puntos de cada selección, esto basado en sus codigos).
+#Salida: Retorna las selecciones que hay en cada grupo ordenadas por sus puntos acumulados.
 #Restricciones: La lista self.__equipos debe estar ordenada y el diccionario debe tener los puntos.
 
     def mostrar_tabla(self, puntos_por_equipo):
 
-        tabla = []
+        texto_tabla = ""
 
         for equipo in self.__equipos:
 
             puntos = puntos_por_equipo[equipo.codigo_equipo]
 
-            tabla = tabla.append(equipo.pais.nombre_pais)
+            texto_tabla = texto_tabla + f"{equipo.pais.nombre_pais}: {puntos} puntos\n"
 
-            
 
-        return tabla
+        return texto_tabla
+
+#Objetivo: Simular todos los partidos del grupo llamando al método simular() de cada partido.
+#Entrada: No recibe parámetros (usa self.__partidos).
+#Salida: Los partidos en self.__partidos ahora tienen goles_1 y goles_2 asignados.
+#Restricciones: Los partidos deben estar generados previamente con generar_partidos().
+
+def jugar_partidos(self):
+
+    for partido in self.__partidos:
+
+        partido.simular()
+
+
+
+
+
+#Objetivo: Retornar los dos equipos mejor posicionados del grupo para que avancen a la fase eliminatoria.
+#Entrada: No recibe parámetros externos (usa la lista self.__equipos que ya debe estar ordenada).
+#Salida: Una lista con exactamente 2 objetos de la clase Seleccion (el 1er y 2do lugar).
+#Restricciones: La lista self.__equipos debe estar ordenada previamente por calcular_tabla() y tener al menos 2 equipos.
+def obtener_clasificados(self):
+    return [self.__equipos[0], self.__equipos[1]]
+
+
+
+
+
+
+
+
+
+        
 
 
 
