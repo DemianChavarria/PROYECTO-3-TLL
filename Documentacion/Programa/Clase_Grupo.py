@@ -1,5 +1,14 @@
+
+#Usamos modulo_ejecucion para que python pueda leer los datos de los .txt 
+from Modulo_Ejecucion import Crear_paises, Crear_seleccion
+
+import Datos
+
+#Para poder crear los partidos de un grupo y simularlos
 from Clase_Partido import Partido 
 
+#Para poder verificar los paises que hay "disponibles" para poder usar sus selecciones en los grupos
+from Clase_Pais_Seleccion import Pais
 
 #Para poder obtener las selecciones de un grupo y añadir a datos:
 from Clase_Pais_Seleccion import Seleccion, Datos
