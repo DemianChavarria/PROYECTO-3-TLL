@@ -16,6 +16,8 @@ partidos_grupos = []
 equipos_grupos_clasificados = []
 
 
+
+
 # Fase Eliminatorias
 # ------------------
 
@@ -38,6 +40,5 @@ partidos_2 = []
 clasificados_2 = []
 
 # Final
-
 partido_1 = None
 campeon = None

@@ -13,7 +13,7 @@ import Datos
 # Clase Partido
 class Partido:
 
-    def __init__(self, equipo_1, equipo_2, fase):
+    def __init__(self, equipo_1, equipo_2, fase, id, fecha):
         
 
         self.equipo_1 = equipo_1
@@ -24,46 +24,8 @@ class Partido:
         self.penales_2 = 0
 
         self.fase = fase
-
-        # no se decide
-        self.id_partido = None
-
-
-
-
-        """
-        Descripcion ; lo que se intentara es obtener una fecha automatica en funcion de la fase actual del torneo
-
-        1. si el inicio del programa es true, no realizara este calculo  |  si es false, entonces si realizara el calculo
-        """
-        Datos.inicio = False
-        if not Datos.inicio:
-
-            if self.fase == "Fase de Grupos":
-                
-                self.fecha = f"{random.randint(1, 30)}/06/2026"
-
-            if self.fase == "Dieciceisavos de Final":
-
-                self.fecha = f"{random.randint(1, 20)}/07/2026"
-                
-            elif self.fase == "Octavos de Final":
-
-                self.fecha = f"{random.randint(21, 30)}/07/2026"
-            
-            elif self.fase == "Cuartos de Final":
-
-                self.fecha = f"{random.randint(1, 5)}/08/2026"
-
-            elif self.fase == "Semifinales":
-
-                self.fecha = f"{random.randint(6, 7)}/06/2026"
-            
-            else:
-
-                self.fecha = "10/06/2026"
-    
-
+        self.id_partido = id
+        self.fecha = fecha
 
 
     # Objetivo; Mostrar el resultado del Partido 
@@ -85,7 +47,7 @@ class Partido:
 
 
  
-    # Objetivo; Retonar la seleccion ganadora
+    # Objetivo; activar la simulacion del partido  |  activar el resultado  |  actualizar la informacion en el archivo de texto y generar el ganador
 
     #E: no recibe parametros aparte de si mismo
 
@@ -112,9 +74,7 @@ class Partido:
 
 
 
-
         # variables
-
         txt_partidos = []
 
 
@@ -122,8 +82,15 @@ class Partido:
         Descripcion ; se guardara el resultado del partido en su archivo de texto correspondiente a "partidos.txt"
 
         Nota: el partido debe estar anterriormete registrado en "partidos.txt"
-        """
 
+        """
+        txt_partidos = open("partidos.txt", "w")
+
+        for partido in Datos.g_partidos:
+
+            txt_partidos.write(f"{partido.equipo_1.pais.nombre_pais};{partido.equipo_2.pais.nombre_pais};{partido.fase};{partido.id_partido};{partido.fecha};{partido.goles_1};{partido.goles_2};{partido.penales_1};{partido.penales_2}\n")
+
+        txt_partidos.close()
 
 
 
@@ -137,6 +104,7 @@ class Partido:
         else:
             if self.fase == "Grupos":
                 return None
+
 
 
 
@@ -202,10 +170,6 @@ class Partido:
             else:
                 diferencia = fuerza_equipo_2 - fuerza_equipo_1
 
-
-            print(diferencia)
-            print(tiempo_tarnscurrido)
-            print(tiempo_partido)
 
 
 
@@ -313,7 +277,7 @@ class Partido:
                     jugador.registrar_estadistica(0, 0, 1, 0)
                     equipo_asosciado.registrar_resultados(0, 0, 1, 0)
 
-                    if jugador.tarjeta_adquirida % 2 == 0:
+                    if jugador.tarjeta_adquirida == 2:
                         jugador.registrar_estadistica(0, 0, 0, 1)
                         equipo_asosciado.registrar_resultados(0, 0, 0, 1)
 
@@ -427,9 +391,8 @@ class Partido:
         3. la cantidad de goles obtenidos se pasara a los goleadores y posteiormente a las estadisticas de la seleccion.
 
         4. se validara el resultado del calculo y si resulta parejo se repetira el punto 2 hasta obtener una diferencia en en ambos equipos.
-
-        5. se llamara el metodo generar_ganador() y luego se mostrara el resultado de la tanda de penales por aparte.
-
+        
+        5. retorno el resultado del partido
         """
 
 
@@ -437,11 +400,9 @@ class Partido:
         # variables
         gol_obtenido_1 = 0
         gol_obtenido_2 = 0
-        res_penal_1 = 0
-        res_penal_2 = 0
         continuar = True
         
-
+        
 
         # paso 1
         if self.goles_1 != self.goles_2:
@@ -498,4 +459,52 @@ class Partido:
         resultado = f"{self.equipo_1.pais.nombre_pais} {self.goles_1} - {self.goles_2} {self.equipo_2.pais.nombre_pais} | Penales: ({self.penales_1}-{self.penales_2})"
         return resultado
 
+
 #################################################################################################################################
+#################################################################################################################################
+
+# Obtener Fecha Segun la fase
+# ------------------------------
+
+
+# Objetivo; obtener un fecha para el partido 
+
+#E: recibe una fase actual
+
+#S: retorna la fecha segun la fase en la que este
+
+#R: ninguna 
+def fechas(fase):
+# ------------------------------
+
+    if not Datos.inicio:
+        if fase == "Fase de Grupos":
+                    
+            fecha = f"{random.randint(1, 30)}/06/2026"
+
+        elif fase == "Dieciceisavos de Final":
+
+            fecha = f"{random.randint(1, 20)}/07/2026"
+                    
+        elif fase == "Octavos de Final":
+
+            fecha = f"{random.randint(21, 30)}/07/2026"
+                
+        elif fase == "Cuartos de Final":
+
+            fecha = f"{random.randint(1, 5)}/08/2026"
+
+        elif fase == "Semifinales":
+
+            fecha = f"{random.randint(6, 7)}/06/2026"
+                
+        else:
+
+            fecha = "10/06/2026"
+    
+    else:
+        return 
+
+
+
+    return fecha

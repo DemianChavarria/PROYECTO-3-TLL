@@ -1,6 +1,5 @@
 # Modulos
 import Datos
-
 from Clase_Persona_FUT_ENT import Futbolista, Entrenador
 
 

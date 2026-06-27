@@ -199,4 +199,4 @@ Crear_paises()
 Crear_seleccion()
 imprimir()
 
-partido1 = Partido(Datos.g_selecciones[0], Datos.g_selecciones[1], "Grupos")
+partido1 = Partido(Datos.g_selecciones[0], Datos.g_selecciones[1], "Octavos de Final", 13432, "dddd")
