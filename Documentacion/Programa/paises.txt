@@ -1,2 +1,4 @@
 CRC;Costa Rica;America;100
 ARG;Argentina;America;30
+BRA;Brazil;America;85
+SZA;South Africa;Africa;65

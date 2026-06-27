@@ -229,12 +229,32 @@ class Grupo :
     def obtener_clasificados(self):
         return [self.__equipos[0], self.__equipos[1]]
 
+# 1. PRIMERO: Cargar datos
+Crear_paises()
+Crear_seleccion()
 
+print("Cantidad de elementos:", len(Datos.g_selecciones))
+for i, item in enumerate(Datos.g_selecciones):
+    print(f"Índice {i}: tipo = {type(item)}, valor = {item}")
 
+# 2. Asignar titulares
+for seleccion in Datos.g_selecciones:
+    seleccion.titulares = seleccion.jugadores[:11]
 
+# 3. Crear grupo y agregar equipos
+grupo5 = Grupo("E")
+grupo5.agregar_equipo(Datos.g_selecciones[0])
+grupo5.agregar_equipo(Datos.g_selecciones[1])
+grupo5.agregar_equipo(Datos.g_selecciones[2])
+grupo5.agregar_equipo(Datos.g_selecciones[3])
 
+# 4. Generar y jugar partidos
+grupo5.generar_partidos()
+grupo5.jugar_partidos()
 
-
+# 5. Ver resultados
+for partido in grupo5._Grupo__partidos:
+    print(f"{partido.equipo_1.codigo_equipo} {partido.goles_1} - {partido.goles_2} {partido.equipo_2.codigo_equipo}")
 
 
 
