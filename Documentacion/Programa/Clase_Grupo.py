@@ -1,5 +1,9 @@
 from Clase_Partido import Partido 
 
+
+#Para poder obtener las selecciones de un grupo y añadir a datos:
+from Clase_Pais_Seleccion import Seleccion, Datos
+
 class Grupo :
 
 
