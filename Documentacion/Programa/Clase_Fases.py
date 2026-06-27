@@ -259,9 +259,7 @@ class Fase:
     # Objetivo ; jugar la fase 
     #E: 
     #S: activa cada partido de la fase correspondiente y retorna los resultados junto con el ganador
-    #R:
-
-
+    #R: ninguna 
 
 
 

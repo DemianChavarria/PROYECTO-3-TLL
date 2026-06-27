@@ -1,31 +1,31 @@
-Keylor;Navas;15/12/1986;Costarricense;1;POR;91;FCRF;75;51;35;28
-Francisco;Calvo;08/07/1992;Costarricense;15;DFC;84;FCRF;85;55;44;22
-Juan Pablo;Vargas;06/06/1995;Costarricense;4;DFC;83;FCRF;74;49;48;24
-Carlos;Martinez;30/03/1999;Costarricense;22;LD;80;FCRF;44;22;87;34
-Joseph;Mora;15/01/1993;Costarricense;8;LI;81;FCRF;41;15;89;62
-Celso;Borges;27/05/1988;Costarricense;5;MC;85;FCRF;25;25;58;53
-Yeltsin;Tejeda;17/03/1992;Costarricense;14;MCD;82;FCRF;29;19;113;84
-Brandon;Aguilera;28/06/2003;Costarricense;20;MCO;83;FCRF;36;23;71;66
-Joel;Campbell;26/06/1992;Costarricense;12;ED;86;FCRF;44;25;106;78
-Anthony;Contreras;29/01/2000;Costarricense;9;DC;82;FCRF;55;42;45;28
-Manfred;Ugalde;25/05/2002;Costarricense;19;EI;87;FCRF;51;28;98;83
+Keylor;Navas;15/12/1986;Costarricense;1;POR;91;FCRF;77;56;38;31
+Francisco;Calvo;08/07/1992;Costarricense;15;DFC;84;FCRF;96;57;50;25
+Juan Pablo;Vargas;06/06/1995;Costarricense;4;DFC;83;FCRF;55;28;78;52
+Carlos;Martinez;30/03/1999;Costarricense;22;LD;80;FCRF;51;26;96;34
+Joseph;Mora;15/01/1993;Costarricense;8;LI;81;FCRF;45;22;96;69
+Celso;Borges;27/05/1988;Costarricense;5;MC;85;FCRF;59;60;30;28
+Yeltsin;Tejeda;17/03/1992;Costarricense;14;MCD;82;FCRF;117;86;35;21
+Brandon;Aguilera;28/06/2003;Costarricense;20;MCO;83;FCRF;76;70;42;26
+Joel;Campbell;26/06/1992;Costarricense;12;ED;86;FCRF;109;80;49;26
+Anthony;Contreras;29/01/2000;Costarricense;9;DC;82;FCRF;48;34;58;48
+Manfred;Ugalde;25/05/2002;Costarricense;19;EI;87;FCRF;54;31;100;88
 Erner;Martines;12/09/1889;Costarricense;44;FDC;67;FCRF;0;0;0;0
-Emiliano;Martinez;02/09/1992;Argentino;23;POR;91;ARGF;33;32;8;17
+Emiliano;Martinez;02/09/1992;Argentino;23;POR;91;ARGF;41;39;17;27
 Geronimo;Rulli;20/05/1992;Argentino;12;POR;84;ARGF;0;0;0;0
-Cristian;Romero;27/04/1998;Argentino;13;DFC;89;ARGF;18;37;108;151
+Cristian;Romero;27/04/1998;Argentino;13;DFC;89;ARGF;116;158;25;47
 Nicolas;Otamendi;12/02/1988;Argentino;19;DFC;86;ARGF;0;0;0;0
-Lisandro;Martinez;18/01/1998;Argentino;25;DFC;88;ARGF;22;40;9;18
+Lisandro;Martinez;18/01/1998;Argentino;25;DFC;88;ARGF;30;43;14;22
 Nahuel;Molina;06/04/1998;Argentino;26;LD;86;ARGF;0;0;0;0
 Nicolas;Tagliafico;31/08/1992;Argentino;3;LI;85;ARGF;0;0;0;0
-Rodrigo;De Paul;24/05/1994;Argentino;7;MC;87;ARGF;15;28;130;185
-Enzo;Fernandez;17/01/2001;Argentino;8;MC;89;ARGF;9;26;112;138
-Alexis;Mac Allister;24/12/1998;Argentino;20;MC;88;ARGF;96;95;18;30
+Rodrigo;De Paul;24/05/1994;Argentino;7;MC;87;ARGF;24;37;140;194
+Enzo;Fernandez;17/01/2001;Argentino;8;MC;89;ARGF;123;150;20;36
+Alexis;Mac Allister;24/12/1998;Argentino;20;MC;88;ARGF;31;40;108;107
 Leandro;Paredes;29/06/1994;Argentino;5;MCD;85;ARGF;0;0;0;0
-Giovani;Lo Celso;09/04/1996;Argentino;16;MCO;86;ARGF;135;198;16;27
-Lionel;Messi;24/06/1987;Argentino;10;ED;95;ARGF;59;79;8;28
-Julian;Alvarez;31/01/2000;Argentino;9;DC;90;ARGF;12;30;72;90
-Lautaro;Martinez;22/08/1997;Argentino;22;DC;91;ARGF;4;25;38;32
-Angel;Di Maria;14/02/1988;Argentino;11;ED;87;ARGF;30;38;8;27
+Giovani;Lo Celso;09/04/1996;Argentino;16;MCO;86;ARGF;24;34;146;202
+Lionel;Messi;24/06/1987;Argentino;10;ED;95;ARGF;16;40;66;90
+Julian;Alvarez;31/01/2000;Argentino;9;DC;90;ARGF;81;104;21;42
+Lautaro;Martinez;22/08/1997;Argentino;22;DC;91;ARGF;16;30;49;37
+Angel;Di Maria;14/02/1988;Argentino;11;ED;87;ARGF;21;33;40;51
 Nicolas;Gonzalez;06/04/1998;Argentino;15;EI;84;ARGF;0;0;0;0
 Thiago;Almada;26/04/2001;Argentino;18;MCO;84;ARGF;0;0;0;0
 Exequiel;Palacios;05/10/1998;Argentino;14;MC;85;ARGF;0;0;0;0
