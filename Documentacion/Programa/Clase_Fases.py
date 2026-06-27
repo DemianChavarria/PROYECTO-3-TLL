@@ -54,13 +54,7 @@ class Fase:
 
         3. quito a ambos equipos que ya se encuentran emparejados de la lista de clasificados
 
-        4. crear el id_partido  |  validar que no sea un id repetido
-
-            Dieciceisavos: 5 digitos
-            Octavos: 4 digitos
-            Cuartos: 3 digitos
-            Semifinales: 2 digitos
-            Final: 1_1
+        4. crear el id_partido de 6 digitos  |  validar que no sea un id repetido
 
         5. crear el partido  |  guardarlo en la lista_partidos  |  guardarlo el partido en su lista correspondiente de fases  |  guardarlo en su archivo txt correspondiente a "partidos.txt"
 
@@ -195,30 +189,8 @@ class Fase:
 
                 # Paso 4, Saco el Id con random y valido con for que no sea un id repetido de la lista de partidos
                 while id_partido == 0:
-
-
-                    if fase == "Dieciceisavos de Final":
-
-                        id_partido = random.randint(10000, 99999)
                     
-                    elif fase == "Octavos de Final":
-
-                        id_partido = random.randint(1000, 9999)
-
-                    elif fase == "Cuartos de Final":
-
-                        id_partido = random.randint(100, 999)
-                    
-                    elif fase == "Semifinales":
-
-                        id_partido = random.randint(10, 99)
-                    
-                    else:
-
-                        id_partido = 4
-
-
-
+                    id_partido = random.randint(100000, 999999)
 
                     validar_1 = False
                     
