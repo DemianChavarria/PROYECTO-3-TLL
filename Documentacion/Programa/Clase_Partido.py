@@ -168,8 +168,11 @@ class Partido:
             else:
                 diferencia = fuerza_equipo_2 - fuerza_equipo_1
 
-            print(tiempo_tarnscurrido)
-            print(diferencia)
+
+
+            print("tiempo_tarnscurrido", tiempo_tarnscurrido)
+            print("Diferencia de fuerza",diferencia)
+
 
 
 
@@ -201,8 +204,8 @@ class Partido:
 
 
 
-            print(gol_obtenido_1)
-            print(gol_obtenido_2)
+            print("gol_obtenido_1", gol_obtenido_1)
+            print("gol_obtenido_2", gol_obtenido_2)
 
             # paso 4
             if gol_obtenido_1 > 0:
@@ -293,7 +296,7 @@ class Partido:
 
                         for traspaso in titulares:
 
-                            if traspaso.nombre != jugador.nombre and traspaso.apellido != jugador.apellido:
+                            if traspaso.nombre != jugador.nombre or traspaso.apellido != jugador.apellido:
                                 cambio_titulares.append(traspaso)
                         
 
@@ -327,7 +330,7 @@ class Partido:
 
                         for traspaso in titulares:
 
-                            if traspaso.nombre != jugador.nombre and traspaso.apellido != jugador.apellido:
+                            if traspaso.nombre != jugador.nombre or traspaso.apellido != jugador.apellido:
                                 cambio_titulares.append(traspaso)
                         
 
@@ -480,7 +483,7 @@ def fechas(fase):
             fecha = "10/06/2026"
     
     else:
-        return 
+        return None
 
 
 

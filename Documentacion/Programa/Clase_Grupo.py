@@ -1,17 +1,12 @@
 
-#Usamos modulo_ejecucion para que python pueda leer los datos de los .txt 
-from Modulo_Ejecucion import Crear_paises, Crear_seleccion
-
+#Para que python pueda ver la informacion de los partidos
 import Datos
 
 #Para poder crear los partidos de un grupo y simularlos
-from Clase_Partido import Partido 
+from Clase_Partido import Partido, fechas
 
-#Para poder verificar los paises que hay "disponibles" para poder usar sus selecciones en los grupos
-from Clase_Pais_Seleccion import Pais
-
-#Para poder obtener las selecciones de un grupo y añadir a datos:
-from Clase_Pais_Seleccion import Seleccion, Datos
+#Para crear los IDs random de los partidos
+import random
 
 class Grupo :
 
@@ -66,6 +61,27 @@ class Grupo :
         self.__equipos.append(equipo)
 
 
+#Método para crear un ID random para los partidos, asegurando que no se repita con los ya existentes.
+    def crear_ID_random(self):
+        id_partido = 0
+
+        while id_partido == 0:
+            
+            id_partido = random.randint(10000, 99999)
+
+            validar_1 = False
+            
+            if Datos.g_partidos != []:
+                
+                for partido in Datos.g_partidos:
+
+                    if partido.id_partido == id_partido:
+                        validar_1 = True
+                
+                if validar_1:
+                    id_partido = 0
+
+        return id_partido
 
     #Método para crear los partidos necesarios:
 
@@ -78,6 +94,7 @@ class Grupo :
     #Restricciones: El grupo debe tener exactamente 4 equipos para generar los partidos correctamente.
 
     def generar_partidos(self):
+
         
         # Validación defensiva
         if len(self.__equipos) != 4:
@@ -86,13 +103,25 @@ class Grupo :
         # Ciclos anidados para emparejar sin repetir
         for i in range(len(self.__equipos)):
             for j in range(i + 1, len(self.__equipos)):
-                
+
+    
+                      
+                id_por_partido = self.crear_ID_random()
+
+                print(len(self.__equipos))
+
+                print("Cantidad de Titulares Equipo 1:", len(self.__equipos[i].titulares))
+
+                print("Cantidad de Titulares Equipo 2:", len(self.__equipos[j].titulares))
+
+                print("Generando partido entre:", self.__equipos[i].pais.nombre_pais, "y", self.__equipos[j].pais.nombre_pais)
+
+
                 # Asignar local y visitante
                 local = self.__equipos[i]
                 visitante = self.__equipos[j]
-                
-                
-                partido = Partido(local, visitante, "2026-06-15")
+       
+                partido = Partido(local, visitante, "Fase de Grupos", id_por_partido, fechas("Fase de Grupos"))
                 
                 # Guardar en la lista del grupo
                 self.__partidos.append(partido)
@@ -102,7 +131,7 @@ class Grupo :
 
     #Entrada: El mismo objeto.
 
-    #Salida: La tabla con valores numericos que representan los puntos de cada seleccion por sus jugadores.
+    #Salida: La tabla con valores numericos que representan los puntos de cada seleccion.
 
     #Restricciones: Deben haber partidos en la lista para poder calcular puntos
 
@@ -120,11 +149,23 @@ class Grupo :
             puntos_por_equipo[equipo.codigo_equipo] = 0
 
 
+#Simulacion de cada partido en self.__partidos, si Datos.inicio==True.
+        if not Datos.inicio:
+
+            for simulacion_de_partido in self.__partidos:
+
+                
+
+                simulacion_de_partido.simular()
+        
+
+
 
 
         for partido in self.__partidos:
 
-
+            print("prueba de puntos inicial  ", puntos_por_equipo[partido.equipo_1.codigo_equipo])
+            print("prueba de puntos  inicial ", puntos_por_equipo[partido.equipo_2.codigo_equipo])
     #Si el equipo 1 gana, se le asignan 3 puntos al equipo 1, si empatan se le asigna 1 punto a cada equipo, y si gana el equipo 2 se le asignan 3 puntos al equipo 2.
             if partido.goles_1 > partido.goles_2:
 
@@ -141,9 +182,28 @@ class Grupo :
                 puntos_por_equipo[partido.equipo_2.codigo_equipo] += 3
 
     #Usamos el método ordenar_tabla para ordenar la tabla de puntos de los equipos en el grupo de mayor a menor.
-
         self.ordenar_tabla(puntos_por_equipo)
+
+
+
+        for indice, seleccion in enumerate(self.__equipos):
+
+            posicion = indice + 1
+            puntos = puntos_por_equipo[seleccion.codigo_equipo]
+
+            return f"{posicion}; {seleccion.pais.nombre_pais}; {puntos} puntos"
         
+
+
+
+
+
+
+
+
+
+
+
 
     #Método para ordenar la tabla de puntos de los equipos en el grupo:
 
@@ -193,26 +253,12 @@ class Grupo :
 
         for equipo in self.__equipos:
 
-            puntos = puntos_por_equipo[equipo.codigo_equipo]
+            puntos = self.puntos_por_equipo
 
             texto_tabla = texto_tabla + f"{equipo.pais.nombre_pais}: {puntos} puntos\n"
 
 
         return texto_tabla
-
-    #Objetivo: Simular todos los partidos del grupo llamando al método simular() de cada partido.
-
-    #Entrada: No recibe parámetros (usa self.__partidos).
-
-    #Salida: Los partidos en self.__partidos ahora tienen goles_1 y goles_2 asignados.
-
-    #Restricciones: Los partidos deben estar generados previamente con generar_partidos().
-
-    def jugar_partidos(self):
-
-        for partido in self.__partidos:
-
-            partido.simular()
 
 
 
@@ -229,42 +275,4 @@ class Grupo :
     def obtener_clasificados(self):
         return [self.__equipos[0], self.__equipos[1]]
 
-# 1. PRIMERO: Cargar datos
-Crear_paises()
-Crear_seleccion()
-
-print("Cantidad de elementos:", len(Datos.g_selecciones))
-for i, item in enumerate(Datos.g_selecciones):
-    print(f"Índice {i}: tipo = {type(item)}, valor = {item}")
-
-# 2. Asignar titulares
-for seleccion in Datos.g_selecciones:
-    seleccion.titulares = seleccion.jugadores[:11]
-
-# 3. Crear grupo y agregar equipos
-grupo5 = Grupo("E")
-grupo5.agregar_equipo(Datos.g_selecciones[0])
-grupo5.agregar_equipo(Datos.g_selecciones[1])
-grupo5.agregar_equipo(Datos.g_selecciones[2])
-grupo5.agregar_equipo(Datos.g_selecciones[3])
-
-# 4. Generar y jugar partidos
-grupo5.generar_partidos()
-grupo5.jugar_partidos()
-
-# 5. Ver resultados
-for partido in grupo5._Grupo__partidos:
-    print(f"{partido.equipo_1.codigo_equipo} {partido.goles_1} - {partido.goles_2} {partido.equipo_2.codigo_equipo}")
-
-
-
-
-        
-
-
-
-       
-
-
-            
-        
+             

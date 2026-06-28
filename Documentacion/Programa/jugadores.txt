@@ -1,51 +1,51 @@
-Keylor;Navas;15/12/1986;Costarricense;1;POR;91;FCRF;35;29;75;51
-Francisco;Calvo;08/07/1992;Costarricense;15;DFC;84;FCRF;45;22;85;55
-Juan Pablo;Vargas;06/06/1995;Costarricense;4;DFC;83;FCRF;49;24;74;49
-Carlos;Martinez;30/03/1999;Costarricense;22;LD;80;FCRF;88;36;44;22
-Joseph;Mora;15/01/1993;Costarricense;8;LI;81;FCRF;42;15;90;63
-Celso;Borges;27/05/1988;Costarricense;5;MC;85;FCRF;59;53;25;25
-Yeltsin;Tejeda;17/03/1992;Costarricense;14;MCD;82;FCRF;29;21;114;84
-Brandon;Aguilera;28/06/2003;Costarricense;20;MCO;83;FCRF;36;23;71;66
-Joel;Campbell;26/06/1992;Costarricense;12;ED;86;FCRF;107;78;44;25
-Anthony;Contreras;29/01/2000;Costarricense;9;DC;82;FCRF;55;42;45;28
-Manfred;Ugalde;25/05/2002;Costarricense;19;EI;87;FCRF;52;29;99;86
+Keylor;Navas;15/12/1986;Costarricense;1;POR;91;FCRF;79;52;38;31
+Francisco;Calvo;08/07/1992;Costarricense;15;DFC;84;FCRF;88;61;50;25
+Juan Pablo;Vargas;06/06/1995;Costarricense;4;DFC;83;FCRF;81;51;51;26
+Carlos;Martinez;30/03/1999;Costarricense;22;LD;80;FCRF;45;27;92;39
+Joseph;Mora;15/01/1993;Costarricense;8;LI;81;FCRF;47;17;90;69
+Celso;Borges;27/05/1988;Costarricense;5;MC;85;FCRF;60;57;32;30
+Yeltsin;Tejeda;17/03/1992;Costarricense;14;MCD;82;FCRF;118;87;31;25
+Brandon;Aguilera;28/06/2003;Costarricense;20;MCO;83;FCRF;38;23;73;68
+Joel;Campbell;26/06/1992;Costarricense;12;ED;86;FCRF;110;86;48;28
+Anthony;Contreras;29/01/2000;Costarricense;9;DC;82;FCRF;52;33;58;44
+Manfred;Ugalde;25/05/2002;Costarricense;19;EI;87;FCRF;57;33;105;91
 Erner;Martines;12/09/1889;Costarricense;44;FDC;67;FCRF;0;0;0;0
-Emiliano;Martinez;02/09/1992;Argentino;23;POR;91;ARGF;36;33;9;17
+Emiliano;Martinez;02/09/1992;Argentino;23;POR;91;ARGF;10;20;38;36
 Geronimo;Rulli;20/05/1992;Argentino;12;POR;84;ARGF;0;0;0;0
-Cristian;Romero;27/04/1998;Argentino;13;DFC;89;ARGF;109;151;18;37
+Cristian;Romero;27/04/1998;Argentino;13;DFC;89;ARGF;112;155;21;40
 Nicolas;Otamendi;12/02/1988;Argentino;19;DFC;86;ARGF;0;0;0;0
-Lisandro;Martinez;18/01/1998;Argentino;25;DFC;88;ARGF;22;41;9;19
+Lisandro;Martinez;18/01/1998;Argentino;25;DFC;88;ARGF;27;42;11;22
 Nahuel;Molina;06/04/1998;Argentino;26;LD;86;ARGF;0;0;0;0
 Nicolas;Tagliafico;31/08/1992;Argentino;3;LI;85;ARGF;0;0;0;0
-Rodrigo;De Paul;24/05/1994;Argentino;7;MC;87;ARGF;15;28;130;185
-Enzo;Fernandez;17/01/2001;Argentino;8;MC;89;ARGF;10;27;113;139
-Alexis;Mac Allister;24/12/1998;Argentino;20;MC;88;ARGF;18;31;96;95
+Rodrigo;De Paul;24/05/1994;Argentino;7;MC;87;ARGF;18;31;136;187
+Enzo;Fernandez;17/01/2001;Argentino;8;MC;89;ARGF;117;142;14;31
+Alexis;Mac Allister;24/12/1998;Argentino;20;MC;88;ARGF;97;100;20;34
 Leandro;Paredes;29/06/1994;Argentino;5;MCD;85;ARGF;0;0;0;0
-Giovani;Lo Celso;09/04/1996;Argentino;16;MCO;86;ARGF;136;198;17;28
-Lionel;Messi;24/06/1987;Argentino;10;ED;95;ARGF;59;79;8;28
-Julian;Alvarez;31/01/2000;Argentino;9;DC;90;ARGF;72;91;12;30
-Lautaro;Martinez;22/08/1997;Argentino;22;DC;91;ARGF;4;25;38;32
-Angel;Di Maria;14/02/1988;Argentino;11;ED;87;ARGF;8;28;30;38
+Giovani;Lo Celso;09/04/1996;Argentino;16;MCO;86;ARGF;23;32;139;201
+Lionel;Messi;24/06/1987;Argentino;10;ED;95;ARGF;62;79;11;30
+Julian;Alvarez;31/01/2000;Argentino;9;DC;90;ARGF;74;98;14;36
+Lautaro;Martinez;22/08/1997;Argentino;22;DC;91;ARGF;44;34;6;25
+Angel;Di Maria;14/02/1988;Argentino;11;ED;87;ARGF;33;41;11;30
 Nicolas;Gonzalez;06/04/1998;Argentino;15;EI;84;ARGF;0;0;0;0
 Thiago;Almada;26/04/2001;Argentino;18;MCO;84;ARGF;0;0;0;0
 Exequiel;Palacios;05/10/1998;Argentino;14;MC;85;ARGF;0;0;0;0
 Gonzalo;Montiel;01/01/1997;Argentino;4;LD;84;ARGF;0;0;0;0
-Alisson;Becker;02/10/1992;Brasileño;1;POR;89;BRA;12;8;5;3
+Alisson;Becker;02/10/1992;Brasileño;1;POR;89;BRA;15;14;8;4
 Ederson;Moraes;17/08/1993;Brasileño;12;POR;86;BRA;8;5;2;1
-Thiago;Silva;22/09/1984;Brasileño;3;DFC;87;BRA;45;32;8;12
-Marquinhos;Correa;14/05/1994;Brasileño;4;DFC;88;BRA;38;28;12;8
+Thiago;Silva;22/09/1984;Brasileño;3;DFC;87;BRA;48;34;9;17
+Marquinhos;Correa;14/05/1994;Brasileño;4;DFC;88;BRA;38;30;12;13
 Eder;Militao;18/01/1998;Brasileño;13;DFC;85;BRA;25;18;5;6
 Danilo;Barbosa;15/07/1991;Brasileño;2;LD;84;BRA;32;24;7;9
 Alex;Sandro;26/01/1991;Brasileño;6;LI;85;BRA;28;20;9;11
-Casemiro;Santos;23/02/1992;Brasileño;5;MCD;88;BRA;52;38;15;18
-Bruno;Guimaraes;16/11/1997;Brasileño;8;MC;87;BRA;35;25;12;14
-Lucas;Paqueta;27/08/1997;Brasileño;10;MCO;86;BRA;28;20;18;22
-Neymar;Junior;05/02/1992;Brasileño;11;ED;92;BRA;78;56;45;38
-Vinicius;Junior;12/07/2000;Brasileño;20;EI;93;BRA;42;30;28;25
-Rodrygo;Silva;09/01/2001;Brasileño;9;ED;88;BRA;35;25;22;18
-Gabriel;Jesus;03/04/1997;Brasileño;18;DC;87;BRA;38;28;25;15
+Casemiro;Santos;23/02/1992;Brasileño;5;MCD;88;BRA;54;42;16;21
+Bruno;Guimaraes;16/11/1997;Brasileño;8;MC;87;BRA;40;27;17;16
+Lucas;Paqueta;27/08/1997;Brasileño;10;MCO;86;BRA;20;25;29;20
+Neymar;Junior;05/02/1992;Brasileño;11;ED;92;BRA;49;39;79;57
+Vinicius;Junior;12/07/2000;Brasileño;20;EI;93;BRA;44;32;31;28
+Rodrygo;Silva;09/01/2001;Brasileño;9;ED;88;BRA;27;20;37;26
+Gabriel;Jesus;03/04/1997;Brasileño;18;DC;87;BRA;42;30;27;16
 Richarlison;Andrade;10/05/1997;Brasileño;7;DC;85;BRA;32;24;18;12
-Raphinha;Dias;14/12/1996;Brasileño;19;EI;86;BRA;28;20;15;16
+Raphinha;Dias;14/12/1996;Brasileño;19;EI;86;BRA;30;23;17;18
 Antony;Matheus;24/02/2000;Brasileño;17;ED;84;BRA;22;16;12;10
 Fred;Rodrigues;05/03/1993;Brasileño;15;MC;83;BRA;35;25;8;10
 Fabinho;Tavares;23/10/1993;Brasileño;14;MCD;85;BRA;42;30;6;8
@@ -53,25 +53,25 @@ Philippe;Coutinho;12/06/1992;Brasileño;16;MCO;84;BRA;45;32;22;28
 David;Neres;03/03/1997;Brasileño;21;EI;83;BRA;18;12;10;8
 Gabriel;Martinelli;18/06/2001;Brasileño;22;EI;85;BRA;25;18;14;12
 Endrick;Felipe;21/07/2006;Brasileño;23;DC;82;BRA;8;5;6;4
-Ronwen;Williams;24/01/1992;Sudafricano;1;POR;82;SZA;15;10;2;1
+Ronwen;Williams;24/01/1992;Sudafricano;1;POR;82;SZA;2;3;15;12
 Bruce;Grobbelaar;12/10/1987;Sudafricano;16;POR;78;SZA;8;5;1;0
 Rivaldo;Coetzee;16/10/1996;Sudafricano;20;POR;76;SZA;5;3;0;0
 Sipho;Mbule;28/03/1998;Sudafricano;2;DFC;79;SZA;22;15;3;2
-Bongani;Zungu;13/09/1992;Sudafricano;3;DFC;80;SZA;28;20;5;3
+Bongani;Zungu;13/09/1992;Sudafricano;3;DFC;80;SZA;6;4;28;21
 Thabo;Cele;15/01/1997;Sudafricano;4;DFC;78;SZA;18;12;2;2
 Reeve;Frosler;23/05/1998;Sudafricano;5;LD;77;SZA;20;14;4;3
 Mothobi;Mvala;14/06/1994;Sudafricano;14;DFC;79;SZA;25;18;3;2
 Lyle;Foster;03/09/1997;Sudafricano;6;LI;78;SZA;22;16;5;4
-Teboho;Mokoena;24/01/1997;Sudafricano;8;MC;81;SZA;32;22;8;10
-Andile;Jali;10/04/1990;Sudafricano;15;MCD;80;SZA;38;28;6;8
-Kamohelo;Mahlasela;22/07/1999;Sudafricano;10;MCO;79;SZA;25;18;12;14
-Percy;Tau;13/05/1994;Sudafricano;11;ED;83;SZA;35;25;18;15
-Themba;Zwane;03/08/1989;Sudafricano;7;MC;82;SZA;42;30;15;18
-Keagan;Dolly;22/01/1993;Sudafricano;17;MCO;80;SZA;28;20;10;12
-Evidence;Makgopa;05/06/2000;Sudafricano;9;DC;81;SZA;30;22;14;10
+Teboho;Mokoena;24/01/1997;Sudafricano;8;MC;81;SZA;34;24;11;14
+Andile;Jali;10/04/1990;Sudafricano;15;MCD;80;SZA;39;28;7;9
+Kamohelo;Mahlasela;22/07/1999;Sudafricano;10;MCO;79;SZA;15;14;28;19
+Percy;Tau;13/05/1994;Sudafricano;11;ED;83;SZA;38;27;19;19
+Themba;Zwane;03/08/1989;Sudafricano;7;MC;82;SZA;44;31;17;20
+Keagan;Dolly;22/01/1993;Sudafricano;17;MCO;80;SZA;32;21;13;16
+Evidence;Makgopa;05/06/2000;Sudafricano;9;DC;81;SZA;31;24;16;13
 Oswin;Appollis;14/08/2001;Sudafricano;19;DC;77;SZA;18;12;8;6
-Mihlali;Mayambela;25/08/1996;Sudafricano;21;EI;79;SZA;22;16;9;8
-Fagrie;Lakay;09/09/1991;Sudafricano;13;DC;80;SZA;28;20;12;9
+Mihlali;Mayambela;25/08/1996;Sudafricano;21;EI;79;SZA;23;19;13;10
+Fagrie;Lakay;09/09/1991;Sudafricano;13;DC;80;SZA;28;24;20;11
 Edmilson;Dove;18/04/1999;Sudafricano;22;EI;76;SZA;15;10;6;5
 Thabang;Molefe;12/02/2000;Sudafricano;23;MC;75;SZA;12;8;4;3
 Grant;Margeman;25/05/1992;Sudafricano;18;ED;78;SZA;20;14;7;6

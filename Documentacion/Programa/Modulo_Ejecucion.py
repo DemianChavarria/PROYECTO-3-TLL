@@ -184,14 +184,14 @@ def imprimir():  # prueba
 
     Datos.inicio = False
 
-    for c in range(len(Datos.g_paises)):
+    #for c in range(len(Datos.g_paises)):
 
-        f"Nombre: {Datos.g_paises[c].nombre_pais}"
+       # f"Nombre: {Datos.g_paises[c].nombre_pais}"
     
     for c in range(len(Datos.g_selecciones)):
 
         Datos.g_selecciones[c].calcular_fuerza()
-        Datos.g_selecciones[c].mostrar_datos()
+        #Datos.g_selecciones[c].mostrar_datos()
 
     
 
@@ -199,7 +199,5 @@ Crear_paises()
 Crear_seleccion()
 imprimir()
 
-partido1 = Partido(Datos.g_selecciones[0], Datos.g_selecciones[1], "Octavos de Final", 13432, "dddd")
-partido1.simular()
-partido1.mostrar_resultado()
-partido1.generar_ganador()
+
+#Pruebas, Darsh:

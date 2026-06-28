@@ -1,2 +1,4 @@
 Robles;Antonio;23/07/97;Argentino;ARF334;20;4-4-2;ARGF
 Orldando;Vazquez;30/12/1998;Costarricense;FIFA2026;12;4-4-2;FCRF
+Carlos;Ancelotti;10/06/1959;Brasileño;BRA1234;35;4-3-3;BRA
+Hugo;Broos;06/04/1952;Belga;SZA5678;40;4-2-3-1;SZA
