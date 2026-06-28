@@ -191,7 +191,7 @@ def Crear_partidos():
     Descripcion ; en esta primera parte se crearan los equipos que esten asociados a un a una fase de grupo,  si no hay un grupo en la lista general
     entonces se creara el grupo
 
-    1. crear los grupos
+    1. crear los grupos  |  valido que el id_partido sea de 5 digitos
 
     2. crear el objeto partido 
     
@@ -209,21 +209,23 @@ def Crear_partidos():
 
         partido = linea.strip().split(";")
 
-        fase_agrupado = partido[2].split("_")
-        
-        if Datos.g_fases_grupos == []:
+        if len(partido[3]) == 5:
+
+            fase_agrupado = partido[2].split("_")
             
-            Datos.g_fases_grupos.append(Grupo(fase_agrupado[1]))
-        
-        else:
-            validar = False
-            for grupo in Datos.g_fases_grupos:
-
-                if grupo.__nombre_grupo == fase_agrupado[1]:
-                    validar == True
-
-            if not validar:
+            if Datos.g_fases_grupos == []:
+                
                 Datos.g_fases_grupos.append(Grupo(fase_agrupado[1]))
+            
+            else:
+                validar = False
+                for grupo in Datos.g_fases_grupos:
+
+                    if grupo.__nombre_grupo == fase_agrupado[1]:
+                        validar == True
+
+                if not validar:
+                    Datos.g_fases_grupos.append(Grupo(fase_agrupado[1]))
     
     txt_partidos.close()
 
@@ -237,34 +239,36 @@ def Crear_partidos():
     for linea in txt_partidos:
 
         partido = linea.strip().split(";")
-        
-        # Bloque, se buscara al primer y segunda seleccion
-        for seleccion in Datos.g_selecciones:
 
-            if seleccion.pais.nombre_pais == partido[0]:
-                seleccion_1 = seleccion
+        if len(partido[3]) == 5:
+        
+            # Bloque, se buscara al primer y segunda seleccion
+            for seleccion in Datos.g_selecciones:
+
+                if seleccion.pais.nombre_pais == partido[0]:
+                    seleccion_1 = seleccion
+                
+                else:
+                    if seleccion.pais.nombre_pais == partido[1]:
+                        seleccion_2 = seleccion
+
+
+            creo_partido = Partido(seleccion_1, seleccion_2, partido[2], entero(partido[3]), partido[4])
+            creo_partido.goles_1 = entero(partido[5])
+            creo_partido.goles_2 = entero(partido[6])
+
+
             
-            else:
-                if seleccion.pais.nombre_pais == partido[1]:
-                    seleccion_2 = seleccion
+            
+            # paso 3
+            fase_agrupado = partido[2].split("_")
+            for grupo in Datos.g_fases_grupos:
 
+                if grupo.__nombre_grupo == fase_agrupado[1]:
 
-        creo_partido = Partido(seleccion_1, seleccion_2, partido[2], entero(partido[3]), partido[4])
-        creo_partido.goles_1 = entero(partido[5])
-        creo_partido.goles_2 = entero(partido[6])
-
-
-        
-        
-        # paso 3
-        fase_agrupado = partido[2].split("_")
-        for grupo in Datos.g_fases_grupos:
-
-            if grupo.__nombre_grupo == fase_agrupado[1]:
-
-                grupo.__partidos.appen(creo_partido)
-                grupo.__equipos.append(seleccion_1)
-                grupo.__equipos.append(seleccion_2)
+                    grupo.__partidos.appen(creo_partido)
+                    grupo.__equipos.append(seleccion_1)
+                    grupo.__equipos.append(seleccion_2)
 
             
 

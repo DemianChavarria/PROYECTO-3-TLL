@@ -47,7 +47,7 @@ los clasificados de "partidos_16" se guardaran en "Clasificados_16"
 # Fase Eliminatorias
 # ------------------
 
-fases_txt = ["Fase de Grupos", "Dieciceisavos de Final", "Octavos de Final", "Cuartos de FInal", "Semifinales", "Final de la Copa del Mundo"]
+fases_txt = ["Fase de Grupos", "Dieciceisavos de Final", "Octavos de Final", "Cuartos de Final", "Semifinales", "Final de la Copa del Mundo"]
 
 # Dieciceisavos
 partidos_16 = []
