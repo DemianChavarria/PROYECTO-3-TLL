@@ -115,6 +115,10 @@ class Grupo :
        
                 partido = Partido(local, visitante, "Fase de Grupos", id_por_partido, fechas("Fase de Grupos"))
                 
+                #Recopilamos el atributo nombre de cada grupo (Los atributos se pueden asignar en la ejecucion)
+                partido.grupo = self.obtener_Nombre_De_Grupo()
+
+
                 # Guardar en la lista del grupo
                 self.__partidos.append(partido)
 
@@ -274,9 +278,9 @@ class Grupo :
         return [self.__equipos[0], self.__equipos[1]]
 
 
+#Atributos para usar en otras clases
 
-
-    #Objetivo: Como tenemos encapsulamiento aplicado en este método, es necesario a la hora de usar atributos en otras clases o modulos "desencapsularlo" para acceder a este.
+    #Objetivo: Nombre de grupo está encapsulado|es necesario a la hora de usar atributos en otras clases o modulos "desencapsularlo" para acceder a este.
 
     #Entrada: mismo objeto Grupo
 
@@ -287,4 +291,12 @@ class Grupo :
     def obtener_Nombre_De_Grupo(self):
 
         return self.__nombre_grupo 
+    
+    def obtener_equipos(self):
+
+        return self.__equipos
+    
+    def obtener_partidos(self):
+
+        return self.__partidos
              

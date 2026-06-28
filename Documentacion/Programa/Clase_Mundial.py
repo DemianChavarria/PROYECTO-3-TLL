@@ -241,7 +241,6 @@ class Mundial:
     #Restricciones:
 
 
-
     def crear_grupos(self, cantidad_grupos):
 
 
@@ -308,7 +307,7 @@ class Mundial:
 
         for grupo in self.lista_grupos:
 
-            todos_los_grupos_str = todos_los_grupos_str + f"{grupo.mostrar_tabla()}"
+            todos_los_grupos_str = todos_los_grupos_str + f"{grupo.mostrar_tabla()}" 
 
         
     
