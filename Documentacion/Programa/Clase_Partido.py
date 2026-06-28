@@ -61,32 +61,26 @@ class Partido:
     def generar_ganador(self):
     # ------------------------------
 
-        # validacion previa
-        if self.equipo_1.entrenador == None or self.equipo_2.entrenador == None:
-            return f"Error, algunos de los equipos no tiene los requisitos para iniciar el partido"
-        
-        if len(self.equipo_1.titulares) < 11 or len(self.equipo_2.titulares) < 11:
-            return f"Error, algunos de los equipos no tiene los requisitos para iniciar el partido"
-    
+
+        if not Datos.inicio:
+
+            # variables
+            txt_partidos = []
 
 
-        # variables
-        txt_partidos = []
+            """
+            Descripcion ; se guardara el resultado del partido en su archivo de texto correspondiente a "partidos.txt"
 
+            Nota: el partido debe estar anterriormete registrado en "partidos.txt"
 
-        """
-        Descripcion ; se guardara el resultado del partido en su archivo de texto correspondiente a "partidos.txt"
+            """
+            txt_partidos = open("partidos.txt", "w")
 
-        Nota: el partido debe estar anterriormete registrado en "partidos.txt"
+            for partido in Datos.g_partidos:
 
-        """
-        txt_partidos = open("partidos.txt", "w")
+                txt_partidos.write(f"{partido.equipo_1.pais.nombre_pais};{partido.equipo_2.pais.nombre_pais};{partido.fase};{partido.id_partido};{partido.fecha};{partido.goles_1};{partido.goles_2};{partido.penales_1};{partido.penales_2}\n")
 
-        for partido in Datos.g_partidos:
-
-            txt_partidos.write(f"{partido.equipo_1.pais.nombre_pais};{partido.equipo_2.pais.nombre_pais};{partido.fase};{partido.id_partido};{partido.fecha};{partido.goles_1};{partido.goles_2};{partido.penales_1};{partido.penales_2}\n")
-
-        txt_partidos.close()
+            txt_partidos.close()
 
 
 
@@ -280,7 +274,7 @@ class Partido:
                     jugador.registrar_estadistica(0, 0, 1, 0)
                     equipo_asosciado.registrar_resultados(0, 0, 1, 0)
 
-                    if jugador.tarjeta_adquirida == 2:
+                    if jugador.tarjeta_adquirida >= 2:
                         jugador.registrar_estadistica(0, 0, 0, 1)
                         equipo_asosciado.registrar_resultados(0, 0, 0, 1)
 
@@ -426,8 +420,8 @@ class Partido:
                     self.penales_1 += gol_obtenido_1
                     self.penales_2 += gol_obtenido_2
 
-                    self.equipo_1.registrar_resultados(self.penales_1, self.penales_2, 0, 0)
-                    self.equipo_2.registrar_resultados(self.penales_2, self.penales_1, 0, 0)
+                    self.equipo_1.registrar_resultados(gol_obtenido_1, gol_obtenido_2, 0, 0)
+                    self.equipo_2.registrar_resultados(gol_obtenido_2, gol_obtenido_1, 0, 0)
 
                     gol_obtenido_1 = 0
                     gol_obtenido_2 = 0
