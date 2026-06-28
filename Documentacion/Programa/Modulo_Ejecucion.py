@@ -5,6 +5,8 @@ from Clase_Pais_Seleccion import registrar_pais, registrar_seleccion
 from Modulo_int_str import entero
 from Clase_Persona_FUT_ENT import Futbolista, Entrenador
 from Clase_Partido import Partido
+from Clase_Fases import Fase
+from Clase_Grupo import Grupo
 
 
 
@@ -28,7 +30,7 @@ El orden de ejecucion ira de esta manera:
 
 1. Crear los paises
 2. Crear las selecciones  |  necesita pais, entrenador y jugadores
-3. crear los partidos
+3. crear los partidos  |  requiere la fase de grupos y fases eliminatorias
 
 
 3. probablemete mas pasos
@@ -166,6 +168,105 @@ def Crear_seleccion():
     txt_selecciones.close()
 
 
+#################################################################################################################################
+#################################################################################################################################
+
+# Paso 3. Crear los Partidos
+
+
+# Objetivo; crear todos los objetos de partidos y guardarlos en la lista general de partidos y luego en su lista correspondiente de clasificacion 
+
+#E: la funcion no recibe parametros
+
+#S: retorna la creacion de cada objeto partido en su archivo de texto correspondiente
+
+#R: ninguna
+
+def Crear_partidos():
+# ------------------------------
+
+
+
+    """
+    Descripcion ; en esta primera parte se crearan los equipos que esten asociados a un a una fase de grupo,  si no hay un grupo en la lista general
+    entonces se creara el grupo
+
+    1. crear los grupos
+
+    2. crear el objeto partido 
+    
+    3. guardarlo en su grupos correspondiente  |  guardar las selecciones en su grupo correspondiente
+    """
+
+
+    # Variables
+    txt_partidos = []
+
+
+    # paso 1
+    txt_partidos = open("partidos.txt", "r")
+    for linea in txt_partidos:
+
+        partido = linea.strip().split(";")
+
+        fase_agrupado = partido[2].split("_")
+        
+        if Datos.g_fases_grupos == []:
+            
+            Datos.g_fases_grupos.append(Grupo(fase_agrupado[1]))
+        
+        else:
+            validar = False
+            for grupo in Datos.g_fases_grupos:
+
+                if grupo.__nombre_grupo == fase_agrupado[1]:
+                    validar == True
+
+            if not validar:
+                Datos.g_fases_grupos.append(Grupo(fase_agrupado[1]))
+    
+    txt_partidos.close()
+
+    
+
+
+
+
+    # paso 2
+    txt_partidos = open("partidos.txt", "r")
+    for linea in txt_partidos:
+
+        partido = linea.strip().split(";")
+        
+        # Bloque, se buscara al primer y segunda seleccion
+        for seleccion in Datos.g_selecciones:
+
+            if seleccion.pais.nombre_pais == partido[0]:
+                seleccion_1 = seleccion
+            
+            else:
+                if seleccion.pais.nombre_pais == partido[1]:
+                    seleccion_2 = seleccion
+
+
+        creo_partido = Partido(seleccion_1, seleccion_2, partido[2], entero(partido[3]), partido[4])
+        creo_partido.goles_1 = entero(partido[5])
+        creo_partido.goles_2 = entero(partido[6])
+
+
+        
+        
+        # paso 3
+        fase_agrupado = partido[2].split("_")
+        for grupo in Datos.g_fases_grupos:
+
+            if grupo.__nombre_grupo == fase_agrupado[1]:
+
+                grupo.__partidos.appen(creo_partido)
+                grupo.__equipos.append(seleccion_1)
+                grupo.__equipos.append(seleccion_2)
+
+            
 
 
 
@@ -174,6 +275,88 @@ def Crear_seleccion():
 
 
 
+
+
+
+    """
+    Descripcion ; ahora luego de la fases de grupos, se crearan los partidos de la fase de eliminacion
+
+    1. se crearan todas las fases  |  menos campeon del mundo y fase de grupos
+
+    2. se crea el objeto partido
+
+    3. se guarda en las diferentes lista tanto general y fases, luego  |  el metodo juga_fase clasificara a los equipos nuevamente
+    """
+
+
+
+    # variables
+    txt_partidos = []
+
+
+    # paso 1
+    # Descripcion ;  se crearan todas las fases  |  menos campeon del mundo y fase de grupos
+    for indice in range(1, len(Datos.fases_txt) - 2):
+
+        Datos.g_fases_eliminacion.append(Fase(Datos.fases_txt[indice]))
+    
+
+    
+
+
+    txt_partidos = open("partidos.txt", "r")
+    for linea in txt_partidos:
+
+        partido = linea.strip().split(";")
+
+
+
+
+        # Bloque, se buscara al primer y segunda seleccion
+        for seleccion in Datos.g_selecciones:
+
+            if seleccion.pais.nombre_pais == partido[0]:
+                seleccion_1 = seleccion
+            
+            else:
+                if seleccion.pais.nombre_pais == partido[1]:
+                    seleccion_2 = seleccion
+
+
+
+
+        # Se creara el objeto partido
+        creo_partido = Partido(seleccion_1, seleccion_2, partido[2], entero(partido[3]), partido[4])
+
+        creo_partido.goles_1 = entero(partido[5])
+        creo_partido.goles_2 = entero(partido[6])
+        creo_partido.penales_1 = entero(partido[7])
+        creo_partido.penales_2 = entero(partido[8])
+    
+
+
+        # Se guardara en las diferentes listas
+        Datos.g_partidos.append(creo_partido)
+
+        for fase in Datos.g_fases_eliminacion:
+
+            if fase.fase == creo_partido.fase:
+
+                fase.fase_partidos.append(creo_partido)
+        
+        
+
+        for fase in Datos.g_fases_eliminacion:
+
+            fase.jugar_fase()
+        
+
+
+    # es posible que se añada algo mas
+
+
+#################################################################################################################################
+#################################################################################################################################
 
 
 

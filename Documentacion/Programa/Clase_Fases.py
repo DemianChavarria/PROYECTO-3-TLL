@@ -274,9 +274,13 @@ class Fase:
 
 
     # Objetivo ; jugar la fase y generar el ganador para la siguiente clasificacion
+
     #E: no recibe parametros aparte de si mismo
+
     #S: activa cada partido de la fase correspondiente y retorna los resultados junto con el ganador
+    
     #R: ninguna 
+
     def jugar_fase(self):
     # ------------------------------
 
@@ -285,8 +289,10 @@ class Fase:
 
 
         for partido in self.fase_partidos:
-
-            partido.simular()
+            
+            if not Datos.inicio:
+                partido.simular()
+                
             ganador = partido.generar_ganador()
 
             if self.fase == "Dieciceisavos de Final":
@@ -308,14 +314,7 @@ class Fase:
 
                 Datos.clasificados_2.append(ganador)
                 clasificados.append(ganador)
-        
-
-        for pais in clasificados:
-
-            
-            
-
-
+    
 
 
 
