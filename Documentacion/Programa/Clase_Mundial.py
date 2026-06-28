@@ -3,7 +3,8 @@ import random
 from Clase_Pais_Seleccion import Pais, Seleccion
 from Clase_Partido import Partido, fechas
 
-
+#Import para crear grupos en base a cuantos sean necesarios:
+from Clase_Grupo import Grupo
 
 
 
@@ -230,3 +231,37 @@ class Mundial:
         else:
             return 
 
+
+    def crear_grupos(self, cantidad_grupos):
+
+
+        if not len(self.lista_selecciones)/cantidad_grupos == 4:
+            return "Error: La cantidad de se selecciones debe ser suficiente para que cada grupo tenga 4 equipos."
+
+
+        #Cantidad de letras para cada grupo:
+        letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+        self.lista_grupos = []
+
+
+        #Cada letra será un grupo 
+        for i in range(cantidad_grupos):
+
+            grupo = Grupo(letras[i])
+
+
+            #Asignar 4 selecciones a cada grupo
+
+                
+
+            for indice_seleccion in range(i*4, i*4+4):
+
+                grupo.agregar_equipo(self.lista_selecciones[indice_seleccion])
+                                     
+                                     
+
+
+            self.lista_grupos.append(grupo)
+
+        
