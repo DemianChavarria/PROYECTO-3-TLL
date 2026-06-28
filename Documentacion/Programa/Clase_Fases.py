@@ -19,9 +19,11 @@ from Clase_Partido import Partido, fechas
 # Clase Fases
 class Fase:
 
-    def __init__(self):
-        pass
+    def __init__(self, fase):
+        
+        self.fase = fase
 
+        self.fase_partidos = []
 
 
 
@@ -33,7 +35,7 @@ class Fase:
 
     #R: ninguna
 
-    def registrar_juego(self, fase):
+    def registrar_juego(self):
     # ------------------------------
         
 
@@ -76,32 +78,46 @@ class Fase:
 
 
 
+        if self.fase == "Dieciceisavos de Final":
+            
+            if Datos.equipos_grupos_clasificados == []:
+                return f"Error, no hay clasificados de la Fase de Grupos"
 
-
-
-
-
-        if fase == "Dieciceisavos de Final":
-
-            clasificados_grupos = Datos.equipos_grupos_clasificados
+            else:
+                clasificados_grupos = Datos.equipos_grupos_clasificados
         
-        elif fase == "Octavos de Final":
-
-            clasificados_grupos = Datos.Clasificados_16
+        elif self.fase == "Octavos de Final":
+            
+            if Datos.Clasificados_16 == []:
+                return f"Error, no hay clasificados de los Dieciceisavos de Final"
+            
+            else:
+                clasificados_grupos = Datos.Clasificados_16
         
-        elif fase == "Cuartos de Final":
+        elif self.fase == "Cuartos de Final":
 
-            clasificados_grupos = Datos.clasificados_8
+            if Datos.clasificados_8 == []:
+
+                return f"Error, no hay clasificados de los Octavos de Final"
+
+            else:
+                clasificados_grupos = Datos.clasificados_8
 
         elif clasificados_grupos == "Semifinales":
 
-            clasificados_grupos = Datos.clasificados_4
+            if Datos.clasificados_4 == []:
+                return f"Error, no hay clasificados de los Cuartos de Final"
+
+            else:
+                clasificados_grupos = Datos.clasificados_4
 
         else:
+            if Datos.clasificados_2 == []:
 
-            clasificados_grupos = Datos.clasificados_2
+                return f"Error, no hay clasificados en los Semifinales"
 
-
+            else:
+                clasificados_grupos = Datos.clasificados_2
 
 
 
@@ -114,13 +130,13 @@ class Fase:
 
 
                 # paso 1,  aqui estoy buscando en que fase estoy para sacar al mejor tercero de la clasificacion anterior
-                if len(clasificados_grupos) == 1 and fase != "Dieciceisavos de Final":
+                if len(clasificados_grupos) == 1 and self.fase != "Dieciceisavos de Final":
 
-                    if fase == "Octavos de Final":
+                    if self.fase == "Octavos de Final":
 
                         clasificacion_anterior = Datos.Clasificados_16
         
-                    elif fase == "Cuartos de Final":
+                    elif self.fase == "Cuartos de Final":
 
                         clasificacion_anterior = Datos.clasificados_8
 
@@ -210,27 +226,28 @@ class Fase:
                 # Paso 5
 
                 # se guardara en la lista general de partidos
-                creo_partido = Partido(seleccion_1, seleccion_2, fase, id_partido)
+                creo_partido = Partido(seleccion_1, seleccion_2, self.fase, id_partido)
                 Datos.g_partidos.append(creo_partido)
+                self.fase_partidos.append(creo_partido)
 
 
 
 
 
                 # se guardara en su lista de fase correspondiente
-                if fase == "Dieciceisavos de Final":
+                if self.fase == "Dieciceisavos de Final":
 
                     Datos.partidos_16.append(creo_partido)
                 
-                elif fase == "Octavos de Final":
+                elif self.fase == "Octavos de Final":
 
                     Datos.partidos_8.append(creo_partido)
                 
-                elif fase == "Cuartos de Final":
+                elif self.fase == "Cuartos de Final":
 
                     Datos.partidos_4.append(creo_partido)
                 
-                elif fase == "Semifinales":
+                elif self.fase == "Semifinales":
 
                     Datos.clasificados_2.append(creo_partido)
                 
@@ -244,7 +261,7 @@ class Fase:
                 # se registrara en su archivo de texto correspondiente
                 txt_partidos = open("partidos.txt", "a")
 
-                txt_partidos.write(f"{creo_partido.equipo_1.pais.nombre_pais};{creo_partido.equipo_2.pais.nombre_pais};{fase};{id_partido};{fechas(fase)}0;0;0;0")
+                txt_partidos.write(f"{creo_partido.equipo_1.pais.nombre_pais};{creo_partido.equipo_2.pais.nombre_pais};{self.fase};{id_partido};{fechas(self.fase)}0;0;0;0")
 
                 txt_partidos.close()
 
@@ -256,11 +273,82 @@ class Fase:
 
 
 
-    # Objetivo ; jugar la fase 
-    #E: 
+    # Objetivo ; jugar la fase y generar el ganador para la siguiente clasificacion
+    #E: no recibe parametros aparte de si mismo
     #S: activa cada partido de la fase correspondiente y retorna los resultados junto con el ganador
     #R: ninguna 
+    def jugar_fase(self):
+    # ------------------------------
 
+        # variable
+        clasificados = []
+
+
+        for partido in self.fase_partidos:
+
+            partido.simular()
+            ganador = partido.generar_ganador()
+
+            if self.fase == "Dieciceisavos de Final":
+
+                Datos.Clasificados_16.append(ganador)
+                clasificados.append(ganador)
+
+            elif self.fase == "Octavos de Final":
+
+                Datos.clasificados_8.append(ganador)
+                clasificados.append(ganador)
+            
+            elif self.fase == "Cuartos de Final":
+
+                Datos.clasificados_4.append(ganador)
+                clasificados.append(ganador)
+            
+            elif self.fase == "Semifinales": 
+
+                Datos.clasificados_2.append(ganador)
+                clasificados.append(ganador)
+        
+
+        for pais in clasificados:
+
+            
+            
+
+
+
+
+
+
+
+    # Objetivo; mostrar los resultados de cada partido
+
+    #E: no recibe parametros aparte de si mismo
+
+    #S: retorna el resultado del partido de cada objeto
+
+    #R: ninguna
+
+    def mostrar_juegos(self):
+    # ------------------------------
+
+        if self.fase_partidos == []:
+            return f"Error, no hay partidos en esta fase"
+        
+        else:
+            for partido in self.fase_partidos:
+
+                partido.mostrar_resultado()
+
+
+    
+
+
+
+
+        
+
+        
 
 
 
