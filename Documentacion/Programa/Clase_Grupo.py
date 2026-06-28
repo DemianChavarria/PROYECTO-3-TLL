@@ -240,10 +240,12 @@ class Grupo :
 
     def mostrar_tabla(self):
 
+#Esta variable podía inicar directa pero visualmente se me hace mas facil entender que se genera, luego va el nombre como encabezado y ya luego la verdadera tabla de puntos.
         texto_tabla = ""
 
 
-        
+        texto_tabla = f"Grupo :{self.__nombre_grupo}\n"
+
         for indice, seleccion in enumerate(self.__equipos):
 
             posicion = indice + 1
@@ -271,4 +273,18 @@ class Grupo :
     def obtener_clasificados(self):
         return [self.__equipos[0], self.__equipos[1]]
 
+
+
+
+    #Objetivo: Como tenemos encapsulamiento aplicado en este método, es necesario a la hora de usar atributos en otras clases o modulos "desencapsularlo" para acceder a este.
+
+    #Entrada: mismo objeto Grupo
+
+    #Salida: nombre grupo para poder ser utilizado en otras clases
+
+    #Restricciones: Tiene que estar nombrado el grupo.
+
+    def obtener_Nombre_De_Grupo(self):
+
+        return self.__nombre_grupo 
              

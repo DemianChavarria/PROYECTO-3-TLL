@@ -232,6 +232,16 @@ class Mundial:
             return 
 
 
+    #Objetivo: Crear la cantidad de grupos que el usuario ingrese.
+
+    #Entrada: Cantidad de grupos | un interger| Este es la cantidad de grupos a generar.
+
+    #Salida: 
+
+    #Restricciones:
+
+
+
     def crear_grupos(self, cantidad_grupos):
 
 
@@ -264,4 +274,41 @@ class Mundial:
 
             self.lista_grupos.append(grupo)
 
+
+#Objetivo: Simular los partidos de cada grupo y mostrar su respectiva tabla
+
+#Entrada: objeto mismo.
+
+#Salida: Quedan los partidos de cada grupo quetuvo un partido simulado (queda la tabla del grupo ordenada)
+
+#Restricciones: Deben haber selecciones y todo lo que un objeto seleccion conlleve.
+
+
+    def jugar_fase_grupos(self):
+
+
+        for grupo in self.lista_grupos:
+
+            grupo.generar_partidos()
+
+            grupo.calcular_tabla()
+
         
+    #Objetivo: Mostrar la tabla con todos los grupos y sus resultados.
+
+    #Entrada: El mismo objeto, mundial
+
+    #Salida: Una tabla donde están todos los grupos con sus resultados.
+
+    #Restricciones: Deberían haber grupos en la lista_grupos.
+
+    def mostrar_tabla_general(self):
+
+        todos_los_grupos_str = ""
+
+        for grupo in self.lista_grupos:
+
+            todos_los_grupos_str = todos_los_grupos_str + f"{grupo.mostrar_tabla()}"
+
+        
+    
