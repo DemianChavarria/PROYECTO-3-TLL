@@ -108,14 +108,6 @@ class Grupo :
                       
                 id_por_partido = self.crear_ID_random()
 
-                print(len(self.__equipos))
-
-                print("Cantidad de Titulares Equipo 1:", len(self.__equipos[i].titulares))
-
-                print("Cantidad de Titulares Equipo 2:", len(self.__equipos[j].titulares))
-
-                print("Generando partido entre:", self.__equipos[i].pais.nombre_pais, "y", self.__equipos[j].pais.nombre_pais)
-
 
                 # Asignar local y visitante
                 local = self.__equipos[i]
@@ -125,6 +117,9 @@ class Grupo :
                 
                 # Guardar en la lista del grupo
                 self.__partidos.append(partido)
+
+                # Guardar en la lista global de partidos
+                Datos.g_partidos.append(partido)
 
 
     #Objetivo: Calcular la tabla de puntos de los partidos.
@@ -157,6 +152,10 @@ class Grupo :
                 
 
                 simulacion_de_partido.simular()
+
+            for partido in self.__partidos:
+
+                partido.generar_ganador()
         
 
 
@@ -164,8 +163,7 @@ class Grupo :
 
         for partido in self.__partidos:
 
-            print("prueba de puntos inicial  ", puntos_por_equipo[partido.equipo_1.codigo_equipo])
-            print("prueba de puntos  inicial ", puntos_por_equipo[partido.equipo_2.codigo_equipo])
+
     #Si el equipo 1 gana, se le asignan 3 puntos al equipo 1, si empatan se le asigna 1 punto a cada equipo, y si gana el equipo 2 se le asignan 3 puntos al equipo 2.
             if partido.goles_1 > partido.goles_2:
 
@@ -183,16 +181,9 @@ class Grupo :
 
     #Usamos el método ordenar_tabla para ordenar la tabla de puntos de los equipos en el grupo de mayor a menor.
         self.ordenar_tabla(puntos_por_equipo)
+        self.__puntos_por_equipo = puntos_por_equipo
 
 
-
-        for indice, seleccion in enumerate(self.__equipos):
-
-            posicion = indice + 1
-            puntos = puntos_por_equipo[seleccion.codigo_equipo]
-
-            return f"{posicion}; {seleccion.pais.nombre_pais}; {puntos} puntos"
-        
 
 
 
@@ -247,15 +238,20 @@ class Grupo :
 #Restricciones: La lista self.__equipos debe estar ordenada y el diccionario debe tener los puntos.
 
 
-    def mostrar_tabla(self, puntos_por_equipo):
+    def mostrar_tabla(self):
 
         texto_tabla = ""
 
-        for equipo in self.__equipos:
 
-            puntos = self.puntos_por_equipo
+        
+        for indice, seleccion in enumerate(self.__equipos):
 
-            texto_tabla = texto_tabla + f"{equipo.pais.nombre_pais}: {puntos} puntos\n"
+            posicion = indice + 1
+            puntos = self.__puntos_por_equipo[seleccion.codigo_equipo]
+
+            texto_tabla = texto_tabla + (f"{posicion}; {seleccion.pais.nombre_pais}; {puntos} puntos\n")
+        
+
 
 
         return texto_tabla

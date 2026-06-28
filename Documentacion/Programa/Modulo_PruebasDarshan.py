@@ -16,3 +16,5 @@ grupo1.agregar_equipo(Datos.g_selecciones[3])
 grupo1.generar_partidos()
 
 grupo1.calcular_tabla()
+
+print(grupo1.mostrar_tabla())
