@@ -284,9 +284,6 @@ class Fase:
     def jugar_fase(self):
     # ------------------------------
 
-        # variable
-        clasificados = []
-
 
         for partido in self.fase_partidos:
             
@@ -298,22 +295,22 @@ class Fase:
             if self.fase == "Dieciceisavos de Final":
 
                 Datos.Clasificados_16.append(ganador)
-                clasificados.append(ganador)
+               
 
             elif self.fase == "Octavos de Final":
 
                 Datos.clasificados_8.append(ganador)
-                clasificados.append(ganador)
+               
             
             elif self.fase == "Cuartos de Final":
 
                 Datos.clasificados_4.append(ganador)
-                clasificados.append(ganador)
+              
             
             elif self.fase == "Semifinales": 
 
                 Datos.clasificados_2.append(ganador)
-                clasificados.append(ganador)
+               
     
 
 

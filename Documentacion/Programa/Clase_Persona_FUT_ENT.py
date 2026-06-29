@@ -47,6 +47,20 @@ class Persona:
             self.fecha_nacimiento = fecha_nacimiento
             self.nacionalidad = nacionalidad
 
+    
+    # Objetivo ; mostrar informacion del objeto relacionado a persona
+
+    #E: No recibe parametros aparte de si mismo
+
+    #S: retorna la informacion especifica del objeto persona
+
+    #R: el nombre, apellido, fecha de nacimiento y nacionalidad deben ser strings(str)
+
+    def mostrar(self):
+    # ------------------------------
+
+        return f"------------------------------\n Nombre : {self.nombre}\n Apellido : {self.apellido}\n Fecha de Nacimiento: {self.fecha_nacimiento}\n Nacionalidad: {self.nacionalidad}"
+
 
 #################################################################################################################################
 #################################################################################################################################
