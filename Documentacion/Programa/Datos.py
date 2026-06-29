@@ -12,11 +12,10 @@ inicio = True
 """
 Descripcion ;  estos son los datos generales, es donde se pueden consultar todos los objetos creados y usarlos segun como lo necesite
 """
-g_paises = []
-g_selecciones = []
+
 g_partidos = []
-g_fases_eliminacion = []
-g_fases_grupos = []
+g_mundial = None
+
 
 
 

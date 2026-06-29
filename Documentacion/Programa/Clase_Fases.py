@@ -29,8 +29,8 @@ class Fase:
 
     # Objetivo ; registrar los partidos segun la fase actual del torneo
 
-    #E: recibe la fase actual del torneo 
-
+    #E: no recibe parametros aparte de si mismo
+    
     #S: retorna la lista de partidos segun la fase actual del torneo
 
     #R: ninguna

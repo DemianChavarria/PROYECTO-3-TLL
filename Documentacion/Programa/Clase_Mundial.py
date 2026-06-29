@@ -43,7 +43,7 @@ class Mundial:
 
     #R: la informacion del objeto pais no puede ser otra ya existente en la base de datos  |  evitar guardarlo en el archivo de texto cada vez que el programa se ejecute
     
-    def registrar_paises(self, codigo_fifa, nombre_pais, continente, ranking_fifa):
+    def registrar_pais(self, codigo_fifa, nombre_pais, continente, ranking_fifa):
     # ------------------------------
 
         if Datos.inicio:
@@ -86,7 +86,7 @@ class Mundial:
 
     #R: la informacion del objeto seleccion no puede ser otra ya existente en la base de datos  |  evitar guardarlo en el archivo de texto cada vez que el programa se ejecute
 
-    def registrar_selecciones(self, codigo_equipo, nombre_pais):
+    def registrar_seleccion(self, codigo_equipo, nombre_pais):
     # ------------------------------
 
         if Datos.inicio:
@@ -137,9 +137,9 @@ class Mundial:
                     if Datos.clasificados_4 != []:
 
                         if Datos.clasificados_2 != []:
-                            return
+                            
+                            return f"Ya se clasificaron todas las fases"
 
-                        
                         else:
                             self.lista_fases[3].registrar_juego()
                     
@@ -186,7 +186,7 @@ class Mundial:
             self.lista_fases[3].jugar_fase()
         
         else:
-            return
+            return "Ya se jugadoron todas las fases del torneo desde Dieciceisavos hasta Semifinales"
         
 
     
@@ -227,6 +227,7 @@ class Mundial:
             Datos.partido_1.mostrar_resultado()
             Datos.campeon = Datos.partido_1.generar_ganador()
             self.campeon = Datos.campeon
+            return f"**¡{self.campeon.pais.nombre_pais} es Campeon del Mundo!**"
         
         else:
             return 
@@ -243,35 +244,51 @@ class Mundial:
 
     def crear_grupos(self, cantidad_grupos):
 
-
-        if not len(self.lista_selecciones)/cantidad_grupos == 4:
-            return "Error: La cantidad de se selecciones debe ser suficiente para que cada grupo tenga 4 equipos."
+        if not Datos.inicio:
 
 
-        #Cantidad de letras para cada grupo:
-        letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-        self.lista_grupos = []
+            if not len(self.lista_selecciones)/cantidad_grupos == 4:
+                return "Error: La cantidad de se selecciones debe ser suficiente para que cada grupo tenga 4 equipos."
 
 
-        #Cada letra será un grupo 
-        for i in range(cantidad_grupos):
+            #Cantidad de letras para cada grupo:
+            letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-            grupo = Grupo(letras[i])
-
-
-            #Asignar 4 selecciones a cada grupo
-
-                
-
-            for indice_seleccion in range(i*4, i*4+4):
-
-                grupo.agregar_equipo(self.lista_selecciones[indice_seleccion])
-                                     
-                                     
+            self.lista_grupos = []
 
 
-            self.lista_grupos.append(grupo)
+            #Cada letra será un grupo 
+            for i in range(cantidad_grupos):
+
+                grupo = Grupo(letras[i])
+
+
+                #Asignar 4 selecciones a cada grupo
+
+                    
+
+                for indice_seleccion in range(i*4, i*4+4):
+
+                    grupo.agregar_equipo(self.lista_selecciones[indice_seleccion])
+                                        
+                                        
+
+
+                self.lista_grupos.append(grupo)
+
+
+        else:
+
+            #Cantidad de letras para cada grupo:
+            letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+
+            #Cada letra será un grupo 
+            for i in range(cantidad_grupos):
+
+                self.lista_grupos.append(Grupo(letras[i]))
+
+
 
 
 #Objetivo: Simular los partidos de cada grupo y mostrar su respectiva tabla

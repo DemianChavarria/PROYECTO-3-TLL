@@ -18,14 +18,21 @@ class Partido:
 
         self.equipo_1 = equipo_1
         self.equipo_2 = equipo_2
+        self.fase = fase
+        self.id_partido = id
+        self.fecha = fecha
+
+         # grupo al que pertenece
+        self.grupo = None
+       
+       
         self.goles_1 = 0
         self.goles_2 = 0
         self.penales_1 = 0
         self.penales_2 = 0
 
-        self.fase = fase
-        self.id_partido = id
-        self.fecha = fecha
+
+
 
 
     # Objetivo; Mostrar el resultado del Partido 
@@ -71,30 +78,43 @@ class Partido:
             """
             Descripcion ; se guardara el resultado del partido en su archivo de texto correspondiente a "partidos.txt"
 
-            Nota: el partido debe estar anterriormete registrado en "partidos.txt"
+            Nota: si esta en fase de grupos se añadira un dato extra, especificamente el grupo en el que esta
+
+            si no, entonces todo normal
 
             """
+                
             txt_partidos = open("partidos.txt", "w")
 
             for partido in Datos.g_partidos:
 
-                txt_partidos.write(f"{partido.equipo_1.pais.nombre_pais};{partido.equipo_2.pais.nombre_pais};{partido.fase};{partido.id_partido};{partido.fecha};{partido.goles_1};{partido.goles_2};{partido.penales_1};{partido.penales_2}\n")
+                if partido.fase == "Fase de Grupos":
 
+                    txt_partidos.write(f"{partido.equipo_1.pais.nombre_pais};{partido.equipo_2.pais.nombre_pais};{partido.fase};{partido.grupo};{partido.id_partido};{partido.fecha};{partido.goles_1};{partido.goles_2};{partido.penales_1};{partido.penales_2}\n")
+
+                else:
+                    txt_partidos.write(f"{partido.equipo_1.pais.nombre_pais};{partido.equipo_2.pais.nombre_pais};{partido.fase};{partido.id_partido};{partido.fecha};{partido.goles_1};{partido.goles_2};{partido.penales_1};{partido.penales_2}\n")
+                
             txt_partidos.close()
 
 
 
 
 
-        if self.goles_1 > self.goles_2:
-            return self.equipo_1
 
-        elif self.goles_2 > self.goles_1:
-            return self.equipo_2
 
-        else:
-            if self.fase == "Fase de Grupos":
-                return None
+        if not self.fase == "Fase de Grupos":
+
+            if self.goles_1 > self.goles_2:
+                return self.equipo_1
+
+            elif self.goles_2 > self.goles_1:
+                return self.equipo_2
+
+            else:
+                if self.fase == "Fase de Grupos":
+                        
+                    return None
 
 
 
@@ -343,10 +363,12 @@ class Partido:
 
             # paso 6
             if tiempo_tarnscurrido == 2:
+                
                 if not self.fase == "Fase de Grupos":
+                    
                     if self.goles_1 == self.goles_2:
-                        tiempo_partido += 1
-                        tiempo_tarnscurrido += 1
+                            tiempo_partido += 1
+                            tiempo_tarnscurrido += 1
                     
                     else:
                         tiempo_tarnscurrido += 1
@@ -360,7 +382,7 @@ class Partido:
 
 
 
-
+        
         if not self.fase == "Fase de Grupos":
 
 

@@ -1,7 +1,7 @@
+"""
 import Datos
 from Clase_Partido import Partido
-
-import Modulo_Ejecucion
+import Modulo_Reconstructor
 
 from Clase_Grupo import Grupo
 
@@ -18,3 +18,4 @@ grupo1.generar_partidos()
 grupo1.calcular_tabla()
 
 print(grupo1.mostrar_tabla())
+"""

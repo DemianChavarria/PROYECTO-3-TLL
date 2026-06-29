@@ -85,9 +85,9 @@ class Pais:
 
 
             # paso 1
-            for c in range(len(Datos.g_paises)):
+            for c in range(len(Datos.g_mundial.lista_paises)):
 
-                if Datos.g_paises[c].codigo_fifa == codigo_fifa or Datos.g_paises[c].nombre_pais == nombre_pais:
+                if Datos.g_mundial.lista_paises[c].codigo_fifa == codigo_fifa or Datos.g_mundial.lista_paises[c].nombre_pais == nombre_pais:
                     return f"Error, la informacion del objeto a modificar ya se encuentra incluido"
                 
 
@@ -102,9 +102,9 @@ class Pais:
             
             # paso 3
             txt_paises = open("paises.txt", "w")
-            for c in range(len(Datos.g_paises)):
+            for c in range(len(Datos.g_mundial.lista_paises)):
 
-                txt_paises.write(f"{Datos.g_paises[c].codigo_fifa};{Datos.g_paises[c].nombre_pais};{Datos.g_paises[c].continente};{Datos.g_paises[c].ranking_fifa}")
+                txt_paises.write(f"{Datos.g_mundial.lista_paises[c].codigo_fifa};{Datos.g_mundial.lista_paises[c].nombre_pais};{Datos.g_mundial.lista_paises[c].continente};{Datos.g_mundial.lista_paises[c].ranking_fifa}")
                 
 
             return f"Pais Modificado"
@@ -142,10 +142,10 @@ class Seleccion:
 
         
         # buscara en el Modulo de base de datos el pais a incluir a la seleccion
-        for c in range(len(Datos.g_paises)):
+        for c in range(len(Datos.g_mundial.lista_paises)):
 
-            if Datos.g_paises[c].nombre_pais == nombre_pais:
-                pais = Datos.g_paises[c]
+            if Datos.g_mundial.lista_paises[c].nombre_pais == nombre_pais:
+                pais = Datos.g_mundial.lista_paises[c]
 
 
 
@@ -637,9 +637,9 @@ class Seleccion:
 
 
         txt_selecciones = open("selecciones.txt", "w")
-        for c in range(len(Datos.g_selecciones)):
+        for c in range(len(Datos.g_mundial.lista_selecciones)):
 
-            txt_selecciones.write(f"{Datos.g_selecciones[c].codigo_equipo};{Datos.g_selecciones[c].pais.nombre_pais};{Datos.g_selecciones[c].total_goles_afavor};{Datos.g_selecciones[c].total_goles_encontra};{Datos.g_selecciones[c].total_tarjetas_amarillas};{Datos.g_selecciones[c].total_tarjetas_rojas}\n")
+            txt_selecciones.write(f"{Datos.g_mundial.lista_selecciones[c].codigo_equipo};{Datos.g_mundial.lista_selecciones[c].pais.nombre_pais};{Datos.g_mundial.lista_selecciones[c].total_goles_afavor};{Datos.g_mundial.lista_selecciones[c].total_goles_encontra};{Datos.g_mundial.lista_selecciones[c].total_tarjetas_amarillas};{Datos.gg_mundial.lista_selecciones[c].total_tarjetas_rojas}\n")
 
         txt_selecciones.close()
 
@@ -647,85 +647,3 @@ class Seleccion:
 
 #################################################################################################################################
 #################################################################################################################################
-
-# Registrar paises y selecciones
-# ------------------------------
-
-
-# Objetivo; guardar la informacion del objeto pais en la base de datos correspondiente a paises.txt  |  evitar validaciones cada vez que el programa se ejecute
-
-#E: receibe los datos especificos para el objeto pais
-
-#S: retorna la informacion del objeto pais en el Modulo de base de datos y en su archivo de texto correspondiente
-
-#R: la informacion del objeto pais no puede ser otra ya existente en la base de datos  |  evitar guardarlo en el archivo de texto cada vez que el programa se ejecute
-
-def registrar_pais(codigo_fifa, nombre_pais, continente, ranking_fifa):
-# ------------------------------
-
-    if Datos.inicio:
-
-        return Pais(codigo_fifa, nombre_pais, continente, ranking_fifa)
-
-    else:
-
-        # Variables
-        txt_paises = []
-
-
-        for c in range(len(Datos.g_paises)):
-
-            if Datos.g_paises[c].codigo_fifa == codigo_fifa or Datos.g_paises[c].nombre_pais == nombre_pais:
-                return f"Error, los datos ingresados ya se encuentran incluidos"
-            
-
-
-        Datos.g_paises.append(Pais(codigo_fifa, nombre_pais, continente, ranking_fifa))
-
-
-
-        txt_paises = open("paises.txt", "a")
-        txt_paises.write(f"{codigo_fifa};{nombre_pais};{continente};{ranking_fifa}\n")
-
-        txt_paises.close()
-
-
-
-
-
-
-# Objetivo; guardar la informacion del objeto Seleccion en la base de datos correspondiente a selecciones.txt
-
-#E: recibe los datos especificos para el objeto seleccion
-
-#S: retorna la informacion del objeto seleccion en el Modulo de base de datos y en su archivo de texto correspondiente
-
-#R: la informacion del objeto seleccion no puede ser otra ya existente en la base de datos  |  evitar guardarlo en el archivo de texto cada vez que el programa se ejecute
-
-def registrar_seleccion(codigo_equipo, nombre_pais):
-
-    if Datos.inicio:
-
-        return Seleccion(codigo_equipo, nombre_pais)
-    
-
-    else:
-
-        # variable
-        txt_selecciones = []
-
-        for c in range(len(Datos.g_selecciones)):
-
-            if Datos.g_selecciones[c].codigo_equipo == codigo_equipo or Datos.g_selecciones[c].pais.nombre_pais == nombre_pais:
-                return f"Error, los datos ya se encuentran incluidos"
-        
-
-
-        Datos.g_selecciones.append(Seleccion(codigo_equipo, nombre_pais))
-
-
-
-        txt_selecciones = open("selecciones.txt", "a")
-        txt_selecciones.write(f"{codigo_equipo};{nombre_pais};0;0;0;0\n")
-
-        txt_selecciones.close()

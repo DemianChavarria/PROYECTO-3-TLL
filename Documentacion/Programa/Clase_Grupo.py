@@ -12,6 +12,9 @@ class Grupo :
 
 
 
+
+
+
 #Objetivo: Método constructor de la clase Grupo
 
 #Entrada: Nombre del grupo
@@ -33,6 +36,9 @@ class Grupo :
 
 
 
+
+
+
 #Objetivo: Método que agrega un equipo a la lista de equipos del grupo
 
 #Entrada: equipo (objeto de la clase Equipo), es una selección de un país que participa en el grupo
@@ -42,23 +48,40 @@ class Grupo :
 #Restricciones: El equipo no puede ya estar en la lista del grupo, y debe tener máximo 3 selecciones para poder añadírsele una más | retorna un error sino.
 
     def agregar_equipo(self, equipo):
-#Valida que no sea de =+4 el grupo ya.
-        if len(self.__equipos) == 4:
 
-            return f"Grupo ya tiene 4 selecciones"
-        
-#Validar no repetidos
-        for seleccion in self.__equipos: 
 
+        if not Datos.inicio:
+
+            #Valida que no sea de =+4 el grupo ya.
+            if len(self.__equipos) == 4:
+
+                return f"Grupo ya tiene 4 selecciones"
             
 
-            if (equipo.codigo_equipo == seleccion.codigo_equipo) or (equipo.pais.nombre_pais == seleccion.pais.nombre_pais):
 
-                return f"Selección del país ya está en el grupo"
+
+            #Validar no repetidos
+            for seleccion in self.__equipos: 
+
             
-#Acción real de añadir selección al grupo
+            
+                if (equipo.codigo_equipo == seleccion.codigo_equipo) or (equipo.pais.nombre_pais == seleccion.pais.nombre_pais):
 
-        self.__equipos.append(equipo)
+                    return f"Selección del país ya está en el grupo"
+
+
+
+
+            #Acción real de añadir selección al grupo
+            self.__equipos.append(equipo)
+    
+
+        else:
+
+            self.__equipos.append(equipo)
+
+
+
 
 
 #Método para crear un ID random para los partidos, asegurando que no se repita con los ya existentes.
@@ -82,6 +105,12 @@ class Grupo :
                     id_partido = 0
 
         return id_partido
+
+
+
+
+
+
 
     #Método para crear los partidos necesarios:
 
@@ -114,6 +143,7 @@ class Grupo :
                 visitante = self.__equipos[j]
        
                 partido = Partido(local, visitante, "Fase de Grupos", id_por_partido, fechas("Fase de Grupos"))
+                partido.grupo = self.__nombre_grupo
                 
                 #Recopilamos el atributo nombre de cada grupo (Los atributos se pueden asignar en la ejecucion)
                 partido.grupo = self.obtener_Nombre_De_Grupo()
@@ -124,6 +154,24 @@ class Grupo :
 
                 # Guardar en la lista global de partidos
                 Datos.g_partidos.append(partido)
+
+
+
+
+
+                # Se guarda en el archivo de texto correspondiente a "partidos.txt"
+
+                # Variables
+                txt_partidos = []
+
+                txt_partidos = open("partidos.txt", "a")
+                txt_partidos.write(f"{partido.equipo_1.pais.nombre_pais};{partido.equipo_2.pais.nombre_pais};{partido.fase};{partido.grupo};{partido.id_partido};{partido.fecha};0;0;0;0\n")
+                txt_partidos.close()
+
+
+
+
+
 
 
     #Objetivo: Calcular la tabla de puntos de los partidos.
@@ -139,8 +187,11 @@ class Grupo :
         if len(self.__partidos) == 0:
 
             return f"No hay partidos para calcular la tabla de puntos."
-    # self.__equipos | tipo: lista, contiene: objetos de la clase Seleccion, quién la usa: Grupo.
-    # puntos_por_equipo | tipo: diccionario, contiene: claves (string codigo_equipo) y valores (int puntos), quién la usa: Grupo.
+        
+
+        # self.__equipos | tipo: lista, contiene: objetos de la clase Seleccion, quién la usa: Grupo.
+        # puntos_por_equipo | tipo: diccionario, contiene: claves (string codigo_equipo) y valores (int puntos), quién la usa: Grupo.
+
         puntos_por_equipo = {}
 
         for equipo in self.__equipos:
@@ -148,18 +199,17 @@ class Grupo :
             puntos_por_equipo[equipo.codigo_equipo] = 0
 
 
-#Simulacion de cada partido en self.__partidos, si Datos.inicio==True.
+
+
+
+        #Simulacion de cada partido en self.__partidos, 
+        # Saltar este proceso si inicio == True
         if not Datos.inicio:
 
             for simulacion_de_partido in self.__partidos:
-
                 
-
                 simulacion_de_partido.simular()
-
-            for partido in self.__partidos:
-
-                partido.generar_ganador()
+                simulacion_de_partido.generar_ganador()
         
 
 
@@ -186,9 +236,6 @@ class Grupo :
     #Usamos el método ordenar_tabla para ordenar la tabla de puntos de los equipos en el grupo de mayor a menor.
         self.ordenar_tabla(puntos_por_equipo)
         self.__puntos_por_equipo = puntos_por_equipo
-
-
-
 
 
 
@@ -233,6 +280,14 @@ class Grupo :
 
                     self.__equipos[j] = equipo_1
 
+
+
+
+
+
+
+
+
 #Objetivo: Retornar para TKINTER la tabla de posiciones del grupo ya ordenada.
 
 #Entrada: puntos_por_equipo (diccionario con los puntos de cada selección, esto basado en sus codigos).
@@ -240,7 +295,6 @@ class Grupo :
 #Salida: Retorna las selecciones que hay en cada grupo ordenadas por sus puntos acumulados.
 
 #Restricciones: La lista self.__equipos debe estar ordenada y el diccionario debe tener los puntos.
-
 
     def mostrar_tabla(self):
 
@@ -278,7 +332,12 @@ class Grupo :
         return [self.__equipos[0], self.__equipos[1]]
 
 
+
+
 #Atributos para usar en otras clases
+
+    #Objetivo: Nombre de grupo está encapsulado|es necesario a la hora de usar atributos en otras clases o modulos "desencapsularlo" para acceder a este.
+
 
     #Objetivo: Nombre de grupo está encapsulado|es necesario a la hora de usar atributos en otras clases o modulos "desencapsularlo" para acceder a este.
 
@@ -300,3 +359,20 @@ class Grupo :
 
         return self.__partidos
              
+
+
+
+
+
+
+    # Objetivo; Obtener los partidos creados cada vez que inicia el programa y guardarlos en su atributo correspondiente
+
+    #E: recibe el objeto partido aparte de si mismo
+
+    #S: guarda el objeto partido en su lista correspondiente a self.__partidos
+
+    #R: solo es llamado cuando el modulo Reconstructor inicia
+
+    def obtener_partido_inicio(self, partido):
+        
+        self.__partidos.append(partido)
